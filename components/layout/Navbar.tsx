@@ -1,0 +1,112 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { Menu, X } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
+
+const navLinks = [
+  { label: "Facilities", href: "/facilities" },
+  { label: "About", href: "/about" },
+  { label: "Dining", href: "/dining" },
+  { label: "Rooms", href: "/rooms" },
+  { label: "Contact", href: "/contact" },
+];
+
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <header className="sticky top-0 z-50 w-full border-b border-zinc-200/60 bg-[#F8F9FA]/95 backdrop-blur-md">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 sm:px-8">
+        {/* Logo */}
+        <Link
+          href="/"
+          className="text-xl font-bold tracking-tight text-zinc-950 sm:text-2xl"
+        >
+          Belmont Hotel
+        </Link>
+
+        {/* Desktop nav — hidden below lg */}
+        <div className="hidden lg:flex items-center gap-10">
+          <nav className="flex items-center gap-7">
+            {navLinks.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="link-underline text-sm font-medium text-zinc-600 hover:text-zinc-950 after:bg-zinc-950"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-3">
+            <Link
+              href="/about"
+              className={buttonVariants({ variant: "outline" })}
+            >
+              Introduction
+            </Link>
+            <Link
+              href="/rooms"
+              className={buttonVariants({ variant: "default" })}
+            >
+              Book now
+            </Link>
+          </div>
+        </div>
+
+        {/* Hamburger — visible below lg (tablet + mobile) */}
+        <button
+          type="button"
+          onClick={() => setOpen(!open)}
+          className="flex lg:hidden rounded-full p-2 text-zinc-700 transition-colors hover:bg-zinc-100"
+          aria-label="Toggle navigation menu"
+        >
+          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
+      </div>
+
+      {/* Mobile / tablet drawer */}
+      {open && (
+        <nav className="lg:hidden border-t border-zinc-200 bg-[#F8F9FA] px-6 pb-6 pt-4">
+          <div className="flex flex-col gap-4">
+            {navLinks.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className="link-underline text-sm font-medium text-zinc-600 hover:text-zinc-950 after:bg-zinc-950"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+          <div className="mt-5 flex flex-col gap-3 border-t border-zinc-200 pt-5">
+            <Link
+              href="/about"
+              onClick={() => setOpen(false)}
+              className={buttonVariants({
+                variant: "outline",
+                className: "w-full",
+              })}
+            >
+              Introduction
+            </Link>
+            <Link
+              href="/rooms"
+              onClick={() => setOpen(false)}
+              className={buttonVariants({
+                variant: "default",
+                className: "w-full",
+              })}
+            >
+              Book now
+            </Link>
+          </div>
+        </nav>
+      )}
+    </header>
+  );
+}
