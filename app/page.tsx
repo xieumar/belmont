@@ -3,7 +3,7 @@ import {
   HotelAbout,
   ExclusiveFacilities,
   WhyChooseUs,
-  FeaturedSuites,
+  SpecialOffers,
   DiscoverDestinations,
   CallToAction,
   HotelFeatures,
@@ -16,7 +16,7 @@ export default function Home() {
       <HotelAbout />
       <HotelFeatures />
       <ExclusiveFacilities />
-      <FeaturedSuites />
+      <SpecialOffers />
       <DiscoverDestinations />
       <WhyChooseUs />
       <CallToAction />
