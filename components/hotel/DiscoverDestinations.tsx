@@ -41,7 +41,7 @@ export default function DiscoverDestinations() {
   return (
     <section className="overflow-hidden bg-background px-6 py-16 sm:px-8 md:py-24">
       <div className="mx-auto w-full max-w-7xl">
-        <h2 className="text-center font-sans text-4xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-5xl md:text-6xl">
+        <h2 className="text-center font-serif text-4xl font-medium leading-[1.1] tracking-tight text-neutral-600 sm:text-5xl md:text-6xl">
           Discover Destinations, Designed
           <br className="hidden md:block" /> for Your Comfort
         </h2>
@@ -57,16 +57,16 @@ export default function DiscoverDestinations() {
             {/* Fixed Left Col with Controls */}
             <div className="flex flex-col lg:col-span-4 lg:justify-between">
               <div className="flex flex-col gap-8">
-                <p className="max-w-sm text-lg font-medium leading-relaxed text-foreground">
+                <p className="max-w-sm text-lg font-medium leading-relaxed text-neutral-600 font-sans">
                   Sunrise connects travelers with carefully selected hotels and
                   resorts, ensuring quality, comfort, and value wherever you go.
                 </p>
                 <div>
-                  <button className="flex w-fit items-center gap-5 rounded-full bg-foreground py-2 pl-6 pr-2 text-background transition-colors hover:bg-foreground/90">
-                    <span className="text-sm font-semibold tracking-wide">
+                  <button className="flex w-fit items-center gap-5 rounded-full bg-terra-400 py-2 pl-6 pr-2 text-neutral-100 transition-colors hover:bg-terra-500">
+                    <span className="text-sm font-medium tracking-wide">
                       Learn More
                     </span>
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-background text-foreground">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-neutral-100 text-terra-400">
                       <ArrowUpRight className="h-5 w-5" />
                     </div>
                   </button>
@@ -75,8 +75,8 @@ export default function DiscoverDestinations() {
 
               {/* Carousel Controls */}
               <div className="mt-8 flex items-center gap-4 lg:mt-0">
-                <CarouselPrevious className="static h-14 w-14 translate-x-0 translate-y-0 border-2 border-border" />
-                <CarouselNext className="static h-14 w-14 translate-x-0 translate-y-0 bg-foreground text-background hover:bg-foreground/90 hover:text-background" />
+                <CarouselPrevious className="static h-14 w-14 translate-x-0 translate-y-0 border-2 border-border text-neutral-600" />
+                <CarouselNext className="static h-14 w-14 translate-x-0 translate-y-0 bg-terra-400 text-neutral-100 hover:bg-terra-500 hover:text-neutral-100 border-none" />
               </div>
             </div>
 
@@ -103,12 +103,12 @@ export default function DiscoverDestinations() {
                           </p>
                         </div>
 
-                        <div className="absolute bottom-6 left-6 flex items-center gap-2 rounded-full bg-white/95 px-5 py-3 text-sm font-bold text-zinc-950 backdrop-blur-md">
+                        <div className="absolute bottom-6 left-6 flex items-center gap-2 rounded-full bg-white/95 px-5 py-3 text-sm font-medium text-neutral-700 backdrop-blur-md">
                           <MapPin className="h-4 w-4" />
                           {dest.title}
                         </div>
 
-                        <div className="absolute bottom-6 right-6 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-white/95 text-zinc-950 backdrop-blur-md transition-colors hover:bg-white">
+                        <div className="absolute bottom-6 right-6 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-white/95 text-neutral-700 backdrop-blur-md transition-colors hover:bg-white">
                           <ArrowUpRight className="h-5 w-5" />
                         </div>
                       </div>

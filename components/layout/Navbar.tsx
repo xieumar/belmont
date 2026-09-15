@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 
@@ -17,14 +18,21 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full bg-background">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 sm:px-8">
         {/* Logo */}
         <Link
           href="/"
-          className="text-xl font-bold tracking-tight text-foreground sm:text-2xl"
+          className="flex items-center gap-2 text-xl font-bold tracking-tight text-foreground sm:text-2xl"
         >
-          Belmont Hotel
+          <Image
+            src="/belmontLogo.png"
+            alt="Belmont Hotel Logo"
+            width={64}
+            height={64}
+            className="object-contain"
+          />
+          <span>Belmont Hotel</span>
         </Link>
 
         {/* Desktop nav — hidden below lg */}

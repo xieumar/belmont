@@ -25,16 +25,16 @@ export default function ExclusiveFacilities() {
         {/* Header Section */}
         <div className="flex flex-col gap-6 md:flex-row md:justify-between lg:gap-12 lg:items-end">
           <div className="max-w-xl">
-            <p className="text-sm font-medium text-muted-foreground">
+            <p className="text-sm font-medium text-neutral-500">
               Premium Facilities
             </p>
-            <h2 className="mt-2 font-sans text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+            <h2 className="mt-2 font-serif text-4xl font-medium leading-tight tracking-tight text-neutral-600 sm:text-5xl lg:text-6xl">
               Exclusive Premium
               <br />
               Facilities
             </h2>
           </div>
-          <p className="max-w-md text-base leading-relaxed text-muted-foreground md:text-lg">
+          <p className="max-w-md text-base leading-relaxed text-neutral-500 md:text-lg font-sans">
             Our exclusive amenities include a luxurious swimming pool and
             breathtaking integrated views. Every corner is meticulously designed
             to create an exceptional ambiance
@@ -54,10 +54,10 @@ export default function ExclusiveFacilities() {
                 />
               </div>
               <div>
-                <h3 className="font-sans text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                <h3 className="font-serif text-2xl font-medium tracking-tight text-neutral-600 sm:text-3xl">
                   {facility.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base pr-4">
+                <p className="mt-2 text-sm leading-relaxed text-neutral-500 sm:text-base pr-4 font-sans">
                   {facility.description}
                 </p>
               </div>

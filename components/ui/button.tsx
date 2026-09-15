@@ -8,9 +8,9 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "border-2 border-zinc-900 bg-zinc-900 text-white hover:bg-transparent hover:text-zinc-900",
+          "border-2 border-terra-400 bg-terra-400 text-neutral-100 hover:bg-transparent hover:text-terra-400",
         outline:
-          "border-2 border-zinc-900 bg-transparent text-zinc-900 hover:bg-zinc-900 hover:text-white",
+          "border-2 border-terra-400 bg-transparent text-terra-400 hover:bg-terra-400 hover:text-neutral-100",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)] aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
         ghost:

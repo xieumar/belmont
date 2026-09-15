@@ -34,13 +34,13 @@ const features = [
 export default function WhyChooseUs() {
   return (
     <section className="px-4 py-4 sm:px-8 sm:py-8">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-16 overflow-hidden rounded-[2rem] bg-zinc-950 p-8 text-zinc-50 sm:rounded-[2.5rem] lg:flex-row lg:items-center lg:gap-20 lg:p-16">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-16 overflow-hidden rounded-[2rem] bg-neutral-700 p-8 text-neutral-100 sm:rounded-[2.5rem] lg:flex-row lg:items-center lg:gap-20 lg:p-16">
         {/* Left Column (Text & Grid) */}
         <div className="flex-1">
-          <h2 className="font-sans text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+          <h2 className="font-serif text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl">
             Why Choose Us
           </h2>
-          <p className="mt-4 text-base text-zinc-400 sm:text-lg">
+          <p className="mt-4 text-base text-neutral-200 sm:text-lg font-sans">
             Why travelers love booking their sanctuary with Belmont.
           </p>
 
@@ -55,10 +55,10 @@ export default function WhyChooseUs() {
                   <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/20">
                     <Icon className="h-5 w-5 text-white" />
                   </div>
-                  <h3 className="mb-2 font-sans text-xl font-bold tracking-tight">
+                  <h3 className="mb-2 font-serif text-xl font-medium tracking-tight">
                     {feature.title}
                   </h3>
-                  <p className="text-sm leading-relaxed text-zinc-400">
+                  <p className="text-sm leading-relaxed text-neutral-200 font-sans">
                     {feature.description}
                   </p>
                 </div>
@@ -79,7 +79,7 @@ export default function WhyChooseUs() {
             />
           </div>
           {/* Bottom/Front Image */}
-          <div className="absolute bottom-0 left-0 z-10 h-[65%] w-[75%] overflow-hidden rounded-[2rem] border-[6px] border-zinc-950 sm:h-[60%] sm:w-[70%] sm:border-8">
+          <div className="absolute bottom-0 left-0 z-10 h-[65%] w-[75%] overflow-hidden rounded-[2rem] border-[6px] border-neutral-700 sm:h-[60%] sm:w-[70%] sm:border-8">
             <Image
               src="/poolside_night.jpg"
               alt="Poolside relaxation"
