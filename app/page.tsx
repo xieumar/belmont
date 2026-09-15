@@ -5,6 +5,7 @@ import {
   SpecialOffers,
   DiscoverDestinations,
   HotelFeatures,
+  HotelFAQ,
 } from "@/components/hotel";
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
       <ExclusiveFacilities />
       <SpecialOffers />
       <DiscoverDestinations />
+      <HotelFAQ />
     </div>
   );
 }
