@@ -30,9 +30,9 @@ export default function Navbar() {
             alt="Belmont Hotel Logo"
             width={64}
             height={64}
-            className="object-contain"
+            className="object-contain -translate-y-1"
           />
-          <span>Belmont Hotel</span>
+          <span className="translate-y-1">Belmont Hotel</span>
         </Link>
 
         {/* Desktop nav — hidden below lg */}

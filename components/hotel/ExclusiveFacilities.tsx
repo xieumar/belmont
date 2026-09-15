@@ -1,4 +1,10 @@
 import Image from "next/image";
+import {
+  StaggerContainer,
+  StaggerItem,
+  SlideInLeft,
+  SlideInRight,
+} from "@/components/ui/animations";
 
 const facilities = [
   {
@@ -6,31 +12,43 @@ const facilities = [
     description:
       "Relax by our pristine, nature-inspired pools designed to melt away your stress.",
     image: "/poolside_tropical.jpg",
-    className: "md:col-span-2 md:row-span-2",
+    className: "md:col-span-2 md:row-span-1",
+    Animation: SlideInLeft,
   },
   {
     title: "Elegant Lounge",
     description: "Unwind in our sophisticated lounging areas.",
     image: "/lounge.jpg",
     className: "md:col-span-1 md:row-span-1",
+    Animation: SlideInRight,
+  },
+  {
+    title: "Wellness Spa",
+    description: "Rejuvenate your body and mind with our signature treatments.",
+    image: "/massage.jpg",
+    className: "md:col-span-1 md:row-span-1",
+    Animation: SlideInLeft,
   },
   {
     title: "Grand Piano",
     description: "Live entertainment every evening in the hall.",
     image: "/piano.jpg",
-    className: "md:col-span-1 md:row-span-1",
-  },
-  {
-    title: "Rooftop Views",
-    description: "Breathtaking scenery from the top.",
-    image: "/rooftop.jpg",
-    className: "md:col-span-1 md:row-span-1",
+    className: "md:col-span-2 md:row-span-1",
+    Animation: SlideInRight,
   },
   {
     title: "Grand Hall",
     description: "Perfect for exclusive events and gatherings.",
     image: "/hall.jpg",
     className: "md:col-span-2 md:row-span-1",
+    Animation: SlideInLeft,
+  },
+  {
+    title: "Rooftop Views",
+    description: "Breathtaking scenery from the top.",
+    image: "/rooftop.jpg",
+    className: "md:col-span-1 md:row-span-1",
+    Animation: SlideInRight,
   },
 ];
 
@@ -39,31 +57,34 @@ export default function ExclusiveFacilities() {
     <section className="bg-background px-6 py-16 sm:px-8 md:py-24 lg:py-32">
       <div className="mx-auto w-full max-w-7xl">
         {/* Header Section */}
-        <div className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between lg:gap-12">
+        <StaggerContainer className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between lg:gap-12">
           <div className="max-w-xl">
-            <p className="mb-3 font-sans text-sm font-medium uppercase tracking-widest text-terra-400">
-              Premium Facilities
-            </p>
-            <h2 className="font-serif text-4xl font-medium leading-tight tracking-tight text-neutral-800 sm:text-5xl lg:text-6xl">
-              Discover Our
-              <br />
-              Exclusive Spaces
-            </h2>
+            <StaggerItem>
+              <p className="mb-3 font-sans text-sm font-medium uppercase tracking-widest text-terra-400">
+                Premium Facilities
+              </p>
+            </StaggerItem>
+            <StaggerItem>
+              <h2 className="font-serif text-4xl font-medium leading-tight tracking-tight text-neutral-800 sm:text-5xl lg:text-6xl">
+                Discover Our
+                <br />
+                Exclusive Spaces
+              </h2>
+            </StaggerItem>
           </div>
-          <p className="max-w-md font-sans text-base leading-relaxed text-neutral-500 md:text-lg">
-            Our exclusive amenities include luxurious swimming pools,
-            breathtaking rooftop views, and meticulously designed spaces created
-            for an exceptional ambiance.
-          </p>
-        </div>
+          <StaggerItem className="max-w-md">
+            <p className="font-sans text-base leading-relaxed text-neutral-500 md:text-lg">
+              Our exclusive amenities include luxurious swimming pools,
+              breathtaking rooftop views, and meticulously designed spaces
+              created for an exceptional ambiance.
+            </p>
+          </StaggerItem>
+        </StaggerContainer>
 
         {/* Bento Grid Section */}
-        <div
-          className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-6"
-          style={{ gridAutoRows: "300px" }}
-        >
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-6 auto-rows-[300px]">
           {facilities.map((facility) => (
-            <div
+            <facility.Animation
               key={facility.title}
               className={`group relative overflow-hidden rounded-3xl h-[300px] md:h-full w-full ${facility.className}`}
             >
@@ -83,7 +104,7 @@ export default function ExclusiveFacilities() {
                   {facility.description}
                 </p>
               </div>
-            </div>
+            </facility.Animation>
           ))}
         </div>
       </div>

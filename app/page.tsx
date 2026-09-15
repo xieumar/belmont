@@ -11,7 +11,7 @@ import {
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-0.5">
+    <div className="flex flex-col flex-0.5 overflow-x-hidden">
       <HotelHero />
       <HotelAbout />
       <HotelFeatures />

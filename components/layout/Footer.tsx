@@ -44,9 +44,9 @@ export default function Footer() {
                 alt="Belmont Hotel Logo"
                 width={64}
                 height={64}
-                className="object-contain"
+                className="object-contain -translate-y-1"
               />
-              <span>Belmont Hotel</span>
+              <span className="translate-y-1">Belmont Hotel</span>
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
               Unwind in a dreamy seaside haven. Indulge in the epitome of

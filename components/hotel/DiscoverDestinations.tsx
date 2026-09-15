@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { ArrowRight, Utensils, Shirt, Car } from "lucide-react";
+import { SlideUp } from "@/components/ui/animations";
 
 const rooms = [
   {
@@ -64,7 +65,7 @@ export default function DiscoverDestinations() {
 
   return (
     <section className="w-full">
-      <div className="flex min-h-[600px] w-full flex-col lg:flex-row">
+      <SlideUp className="flex min-h-[600px] w-full flex-col lg:flex-row">
         {/* Left Tabs */}
         <div className="flex w-full flex-col bg-background py-4 lg:w-[25%] lg:py-8 lg:pl-8 xl:pl-16 lg:pr-2">
           {rooms.map((room, index) => {
@@ -73,21 +74,21 @@ export default function DiscoverDestinations() {
               <button
                 key={room.id}
                 onClick={() => setActiveTab(index)}
-                className={`relative flex w-full items-center justify-between px-6 py-7 lg:px-8 text-left transition-colors ${
+                className={`relative flex w-full items-center justify-between px-6 py-7 lg:px-8 text-left transition-colors lg:rounded-r-full ${
                   isActive
-                    ? "z-10 bg-terra-400 text-white shadow-lg lg:-mr-6 lg:rounded-r-full"
+                    ? "z-10 bg-terra-400 text-white shadow-lg lg:-mr-6"
                     : "text-neutral-700 hover:bg-neutral-200/50"
                 }`}
               >
-                <span className="font-serif text-lg md:text-xl">
+                <span className="flex items-start font-serif text-lg md:text-xl">
                   <span
-                    className={`mr-3 text-sm ${isActive ? "text-white/80" : "text-terra-400"}`}
+                    className={`mr-3 mt-1 shrink-0 text-sm ${isActive ? "text-white/80" : "text-terra-400"}`}
                   >
                     {room.id}
                   </span>
-                  {room.name}
+                  <span>{room.name}</span>
                 </span>
-                {isActive && <ArrowRight className="h-5 w-5" />}
+                {isActive && <ArrowRight className="h-5 w-5 shrink-0 ml-4" />}
               </button>
             );
           })}
@@ -163,7 +164,7 @@ export default function DiscoverDestinations() {
             </div>
           </div>
         </div>
-      </div>
+      </SlideUp>
     </section>
   );
 }

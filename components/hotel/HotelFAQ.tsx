@@ -4,6 +4,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import {
+  StaggerContainer,
+  StaggerItem,
+  SlideUp,
+} from "@/components/ui/animations";
 
 const faqs = [
   {
@@ -37,33 +42,39 @@ export default function HotelFAQ() {
   return (
     <section className="bg-terra-400 px-6 py-16 sm:px-8 md:py-24 border-t border-terra-500/50">
       <div className="mx-auto w-full max-w-4xl">
-        <div className="mb-12 text-center">
-          <p className="mb-3 font-sans text-sm font-medium uppercase tracking-widest text-terra-100">
-            Got Questions?
-          </p>
-          <h2 className="font-serif text-4xl font-medium tracking-tight text-neutral-100 sm:text-5xl lg:text-6xl">
-            Frequently Asked
-            <br />
-            Questions
-          </h2>
-        </div>
+        <StaggerContainer className="mb-12 text-center">
+          <StaggerItem>
+            <p className="mb-3 font-sans text-sm font-medium uppercase tracking-widest text-terra-100">
+              Got Questions?
+            </p>
+          </StaggerItem>
+          <StaggerItem>
+            <h2 className="font-serif text-4xl font-medium tracking-tight text-neutral-100 sm:text-5xl lg:text-6xl">
+              Frequently Asked
+              <br />
+              Questions
+            </h2>
+          </StaggerItem>
+        </StaggerContainer>
 
-        <Accordion className="flex flex-col gap-4 w-full">
-          {faqs.map((faq, index) => (
-            <AccordionItem
-              key={index}
-              value={`item-${index}`}
-              className="overflow-hidden rounded-2xl border border-terra-300 bg-terra-500 px-4 sm:px-8 data-open:bg-terra-600 transition-colors border-b-0"
-            >
-              <AccordionTrigger className="text-left font-serif text-xl font-medium text-neutral-100 hover:no-underline sm:text-2xl py-6 **:data-[slot=accordion-trigger-icon]:text-terra-200 **:data-[slot=accordion-trigger-icon]:size-6">
-                {faq.question}
-              </AccordionTrigger>
-              <AccordionContent className="font-sans text-base leading-relaxed text-terra-100 sm:text-lg pb-6">
-                {faq.answer}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+        <SlideUp delay={0.2}>
+          <Accordion className="flex flex-col gap-4 w-full">
+            {faqs.map((faq, index) => (
+              <AccordionItem
+                key={index}
+                value={`item-${index}`}
+                className="overflow-hidden rounded-2xl border border-terra-300 bg-terra-500 px-4 sm:px-8 data-open:bg-terra-600 transition-colors border-b-0"
+              >
+                <AccordionTrigger className="text-left font-serif text-xl font-medium text-neutral-100 hover:no-underline sm:text-2xl py-6 **:data-[slot=accordion-trigger-icon]:text-terra-200 **:data-[slot=accordion-trigger-icon]:size-6">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="font-sans text-base leading-relaxed text-terra-100 sm:text-lg pb-6">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </SlideUp>
       </div>
     </section>
   );
