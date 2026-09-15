@@ -6,6 +6,7 @@ import {
   DiscoverDestinations,
   HotelFeatures,
   HotelFAQ,
+  CallToAction,
 } from "@/components/hotel";
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
       <SpecialOffers />
       <DiscoverDestinations />
       <HotelFAQ />
+      <CallToAction />
     </div>
   );
 }
