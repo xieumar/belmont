@@ -2,10 +2,8 @@ import {
   HotelHero,
   HotelAbout,
   ExclusiveFacilities,
-  WhyChooseUs,
   SpecialOffers,
   DiscoverDestinations,
-  CallToAction,
   HotelFeatures,
 } from "@/components/hotel";
 
@@ -18,8 +16,6 @@ export default function Home() {
       <ExclusiveFacilities />
       <SpecialOffers />
       <DiscoverDestinations />
-      <WhyChooseUs />
-      <CallToAction />
     </div>
   );
 }

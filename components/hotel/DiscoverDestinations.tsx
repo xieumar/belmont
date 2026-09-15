@@ -1,138 +1,168 @@
-import Image from "next/image";
-import { ArrowUpRight, MapPin } from "lucide-react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+"use client";
 
-const destinations = [
+import Image from "next/image";
+import { useState } from "react";
+import { ArrowRight, Utensils, Shirt, Car } from "lucide-react";
+
+const rooms = [
   {
-    title: "New York City, USA",
-    subtitle: "A Smarter Way to Find, Compare, and Book Your Ideal Stay",
-    image: "/poolside.jpg",
-    type: "large",
+    id: "01",
+    name: "Premium cottage",
+    eyebrow: "Cozy & intimate",
+    title: "Premium cottage",
+    description:
+      "Experience the ultimate comfort in our secluded cottage with beautiful garden views and rustic charm.",
+    price: "$35.00",
+    image: "/room1.jpg",
   },
   {
-    title: "Experience destinations",
-    subtitle:
-      "Experience destinations where comfort meets elegance, and every stay feels like home.",
-    image: "/hero.jpg",
-    type: "small",
+    id: "02",
+    name: "Studios with terrace",
+    eyebrow: "Outdoor living",
+    title: "Studios with terrace",
+    description:
+      "Enjoy a spacious open-plan layout featuring a private terrace perfect for evening relaxation.",
+    price: "$40.00",
+    image: "/room.jpg",
   },
   {
-    title: "Aruba Coast",
-    subtitle: "Discover pristine waters and endless relaxation by the coast.",
-    image: "/poolside_tropical.jpg",
-    type: "large",
+    id: "03",
+    name: "Premium pavilions",
+    eyebrow: "Phenomenal view",
+    title: "Premium pavilions",
+    description:
+      "Discover a private home in the orchard three bedrooms and baths with a private plunge pool and service and a three sided view from the king size bed.",
+    price: "$50.00",
+    image: "/room2.jpg",
   },
   {
-    title: "Hidden Gems",
-    subtitle:
-      "Explore carefully curated retreats designed for your ultimate comfort.",
-    image: "/poolside_night.jpg",
-    type: "small",
+    id: "04",
+    name: "The luxury villa",
+    eyebrow: "Ultimate elegance",
+    title: "The luxury villa",
+    description:
+      "A breathtaking villa designed for grandeur, featuring exquisite interiors and sweeping panoramic views.",
+    price: "$95.00",
+    image: "/room3.jpg",
+  },
+  {
+    id: "05",
+    name: "Grand deluxe room",
+    eyebrow: "Spacious luxury",
+    title: "Grand deluxe room",
+    description:
+      "Our largest room option boasting premium amenities, sophisticated decor, and unparalleled service.",
+    price: "$75.00",
+    image: "/room4.jpg",
   },
 ];
 
 export default function DiscoverDestinations() {
+  const [activeTab, setActiveTab] = useState(2); // Default to "03 Premium pavilions"
+
+  const activeRoom = rooms[activeTab];
+
   return (
-    <section className="overflow-hidden bg-background px-6 py-16 sm:px-8 md:py-24">
-      <div className="mx-auto w-full max-w-7xl">
-        <h2 className="text-center font-serif text-4xl font-medium leading-[1.1] tracking-tight text-neutral-600 sm:text-5xl md:text-6xl">
-          Discover Destinations, Designed
-          <br className="hidden md:block" /> for Your Comfort
-        </h2>
-
-        <Carousel
-          opts={{
-            align: "start",
-            loop: true,
-          }}
-          className="mt-16 w-full"
-        >
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-12 lg:items-stretch">
-            {/* Fixed Left Col with Controls */}
-            <div className="flex flex-col lg:col-span-4 lg:justify-between">
-              <div className="flex flex-col gap-8">
-                <p className="max-w-sm text-lg font-medium leading-relaxed text-neutral-600 font-sans">
-                  Sunrise connects travelers with carefully selected hotels and
-                  resorts, ensuring quality, comfort, and value wherever you go.
-                </p>
-                <div>
-                  <button className="flex w-fit items-center gap-5 rounded-full bg-terra-400 py-2 pl-6 pr-2 text-neutral-100 transition-colors hover:bg-terra-500">
-                    <span className="text-sm font-medium tracking-wide">
-                      Learn More
-                    </span>
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-neutral-100 text-terra-400">
-                      <ArrowUpRight className="h-5 w-5" />
-                    </div>
-                  </button>
-                </div>
-              </div>
-
-              {/* Carousel Controls */}
-              <div className="mt-8 flex items-center gap-4 lg:mt-0">
-                <CarouselPrevious className="static h-14 w-14 translate-x-0 translate-y-0 border-2 border-border text-neutral-600" />
-                <CarouselNext className="static h-14 w-14 translate-x-0 translate-y-0 bg-terra-400 text-neutral-100 hover:bg-terra-500 hover:text-neutral-100 border-none" />
-              </div>
-            </div>
-
-            {/* Carousel Right Col */}
-            <div className="w-full lg:col-span-8 overflow-hidden">
-              <CarouselContent className="-ml-6">
-                {destinations.map((dest, idx) => (
-                  <CarouselItem
-                    key={idx}
-                    className={`pl-6 ${dest.type === "large" ? "sm:basis-3/5 lg:basis-[55%]" : "sm:basis-2/5 lg:basis-[45%]"} flex items-center`}
+    <section className="w-full">
+      <div className="flex min-h-[600px] w-full flex-col lg:flex-row">
+        {/* Left Tabs */}
+        <div className="flex w-full flex-col bg-background py-4 lg:w-[25%] lg:py-8 lg:pl-8 xl:pl-16 lg:pr-2">
+          {rooms.map((room, index) => {
+            const isActive = index === activeTab;
+            return (
+              <button
+                key={room.id}
+                onClick={() => setActiveTab(index)}
+                className={`relative flex w-full items-center justify-between px-6 py-7 lg:px-8 text-left transition-colors ${
+                  isActive
+                    ? "z-10 bg-terra-400 text-white shadow-lg lg:-mr-6 lg:rounded-r-full"
+                    : "text-neutral-700 hover:bg-neutral-200/50"
+                }`}
+              >
+                <span className="font-serif text-lg md:text-xl">
+                  <span
+                    className={`mr-3 text-sm ${isActive ? "text-white/80" : "text-terra-400"}`}
                   >
-                    {dest.type === "large" ? (
-                      <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2.5rem] bg-muted lg:aspect-[3/4]">
-                        <Image
-                          src={dest.image}
-                          alt={dest.title}
-                          fill
-                          className="object-cover transition-transform duration-1000 hover:scale-105"
-                        />
+                    {room.id}
+                  </span>
+                  {room.name}
+                </span>
+                {isActive && <ArrowRight className="h-5 w-5" />}
+              </button>
+            );
+          })}
+        </div>
 
-                        <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/80 via-black/20 to-transparent p-8">
-                          <p className="mb-12 max-w-[250px] text-xl font-medium leading-snug text-white">
-                            {dest.subtitle}
-                          </p>
-                        </div>
+        {/* Center Image */}
+        <div className="relative h-[400px] w-full lg:h-auto lg:w-[45%]">
+          <Image
+            src={activeRoom.image}
+            alt={activeRoom.title}
+            fill
+            className="object-cover"
+          />
+          {/* Price Widget */}
+          <div className="absolute bottom-0 left-1/2 flex -translate-x-1/2 shadow-xl lg:left-1/2 lg:-translate-x-1/2">
+            <div className="flex min-w-[140px] flex-col justify-center bg-white px-6 py-4 lg:min-w-[180px] lg:px-8 lg:py-5">
+              <p className="mb-1 font-sans text-xs uppercase tracking-wider text-neutral-400">
+                Starting from
+              </p>
+              <p className="font-serif text-2xl font-medium text-neutral-900 lg:text-3xl">
+                {activeRoom.price}
+              </p>
+            </div>
+            <button className="group flex items-center justify-center gap-4 bg-[#2D2D2D] px-6 py-4 text-white transition-colors hover:bg-black lg:px-8 lg:py-5">
+              <span className="w-12 text-left text-xs font-bold leading-tight tracking-widest uppercase lg:text-sm">
+                Book
+                <br />
+                Now
+              </span>
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 transition-colors group-hover:bg-white/20">
+                <ArrowRight className="h-4 w-4" />
+              </div>
+            </button>
+          </div>
+        </div>
 
-                        <div className="absolute bottom-6 left-6 flex items-center gap-2 rounded-full bg-white/95 px-5 py-3 text-sm font-medium text-neutral-700 backdrop-blur-md">
-                          <MapPin className="h-4 w-4" />
-                          {dest.title}
-                        </div>
+        {/* Right Details */}
+        <div className="flex w-full flex-col justify-center bg-background px-6 py-12 lg:w-[30%] lg:px-12 xl:pr-16">
+          <p className="mb-2 font-sans text-sm text-terra-400">
+            {activeRoom.eyebrow}
+          </p>
+          <h3 className="mb-6 font-serif text-4xl font-medium text-neutral-800 lg:text-[2.75rem] leading-[1.1]">
+            {activeRoom.title}
+          </h3>
+          <p className="mb-12 font-sans leading-relaxed text-neutral-500">
+            {activeRoom.description}
+          </p>
 
-                        <div className="absolute bottom-6 right-6 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-white/95 text-neutral-700 backdrop-blur-md transition-colors hover:bg-white">
-                          <ArrowUpRight className="h-5 w-5" />
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="flex w-full flex-col gap-8">
-                        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[2.5rem] bg-muted">
-                          <Image
-                            src={dest.image}
-                            alt={dest.title}
-                            fill
-                            className="object-cover transition-transform duration-1000 hover:scale-105"
-                          />
-                        </div>
-                        <p className="text-lg font-medium leading-relaxed text-muted-foreground">
-                          {dest.subtitle}
-                        </p>
-                      </div>
-                    )}
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
+          <div className="grid grid-cols-3 gap-2 border-t border-neutral-200/60 pt-8 lg:gap-4">
+            <div className="flex flex-col items-center gap-4 text-center">
+              <Utensils className="h-8 w-8 text-terra-400" strokeWidth={1} />
+              <span className="text-[9px] font-bold uppercase tracking-widest text-neutral-700 lg:text-[10px]">
+                Breakfast
+                <br />
+                Included
+              </span>
+            </div>
+            <div className="flex flex-col items-center gap-4 border-l border-neutral-200/60 text-center">
+              <Shirt className="h-8 w-8 text-terra-400" strokeWidth={1} />
+              <span className="text-[9px] font-bold uppercase tracking-widest text-neutral-700 lg:text-[10px]">
+                Laundry
+                <br />
+                Facilities
+              </span>
+            </div>
+            <div className="flex flex-col items-center gap-4 border-l border-neutral-200/60 text-center">
+              <Car className="h-8 w-8 text-terra-400" strokeWidth={1} />
+              <span className="text-[9px] font-bold uppercase tracking-widest text-neutral-700 lg:text-[10px]">
+                Pickup
+                <br />
+                And Drop
+              </span>
             </div>
           </div>
-        </Carousel>
+        </div>
       </div>
     </section>
   );
