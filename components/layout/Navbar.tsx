@@ -51,12 +51,6 @@ export default function Navbar() {
 
           <div className="flex items-center gap-3">
             <Link
-              href="/about"
-              className={buttonVariants({ variant: "outline" })}
-            >
-              Introduction
-            </Link>
-            <Link
               href="/rooms"
               className={buttonVariants({ variant: "default" })}
             >
@@ -92,16 +86,6 @@ export default function Navbar() {
             ))}
           </div>
           <div className="mt-5 flex flex-col gap-3 border-t border-border pt-5">
-            <Link
-              href="/about"
-              onClick={() => setOpen(false)}
-              className={buttonVariants({
-                variant: "outline",
-                className: "w-full",
-              })}
-            >
-              Introduction
-            </Link>
             <Link
               href="/rooms"
               onClick={() => setOpen(false)}

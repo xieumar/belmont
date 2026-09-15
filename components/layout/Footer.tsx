@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -36,9 +37,16 @@ export default function Footer() {
           <div className="lg:col-span-4">
             <Link
               href="/"
-              className="text-2xl font-bold tracking-tight text-foreground"
+              className="flex items-center gap-2 text-2xl font-bold tracking-tight text-foreground"
             >
-              Belmont Hotel
+              <Image
+                src="/belmontLogo.png"
+                alt="Belmont Hotel Logo"
+                width={64}
+                height={64}
+                className="object-contain"
+              />
+              <span>Belmont Hotel</span>
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
               Unwind in a dreamy seaside haven. Indulge in the epitome of
