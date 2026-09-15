@@ -1,44 +1,58 @@
 import Image from "next/image";
+import { Phone } from "lucide-react";
 
 export default function HotelAbout() {
   return (
-    <section className="py-24 px-4 md:px-8 max-w-7xl mx-auto w-full font-serif text-neutral-700">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-8 items-center max-w-5xl mx-auto">
-        {/* Text Content */}
-        <div className="max-w-md md:pr-8">
-          <h2 className="font-serif text-4xl md:text-[2.75rem] font-medium text-neutral-600 mb-6 leading-[1.1] tracking-tight">
-            Where the ocean
-            <br />
-            feels close
-          </h2>
-          <p className="text-[15px] text-neutral-500 leading-relaxed mb-10 font-sans">
-            Surrounded by coastal shores, Belmont invites you to slow down and
-            reconnect with the natural rhythm of the sea. Mornings arrive softly
-            with drifting light, and evenings settle into calm, uninterrupted
-            stillness.
-          </p>
-          <button className="bg-terra-400 hover:bg-terra-500 text-neutral-100 px-8 py-3.5 rounded-full uppercase tracking-wider text-xs font-bold transition-colors duration-300 font-sans">
-            Discover Nature
-          </button>
-        </div>
+    <section className="bg-background px-6 py-16 sm:px-8 md:py-24">
+      <div className="mx-auto w-full max-w-7xl">
+        <div className="grid grid-cols-1 items-center gap-16 md:grid-cols-2 md:gap-8 lg:gap-16">
+          {/* Text Content */}
+          <div className="max-w-xl">
+            <p className="mb-3 font-sans text-sm font-medium text-terra-400">
+              About resorts
+            </p>
+            <h2 className="mb-6 font-serif text-4xl font-medium leading-[1.1] tracking-tight text-neutral-800 sm:text-5xl lg:text-[3.5rem]">
+              Relax at the luxury resorts around the entire world.
+            </h2>
+            <p className="mb-10 max-w-md font-sans text-base leading-relaxed text-neutral-500">
+              A design-led approach guides the team, implementing practices,
+              products and services that are thoughtful and environmentally
+              sound. Family of professionals that creates intelligent designs
+              that help the face of hospitality.
+            </p>
 
-        {/* Images */}
-        <div className="relative pl-0 md:pl-12 mt-12 md:mt-0">
-          <div className="relative h-[450px] md:h-[550px] w-full md:w-[90%] rounded-[2rem] overflow-hidden bg-slate-200">
-            <Image
-              src="/poolside_tropical.jpg"
-              alt="Belmont Resort Nature"
-              fill
-              className="object-cover"
-            />
+            <div className="flex flex-wrap items-center gap-6 font-sans">
+              <button className="rounded bg-neutral-800 px-8 py-3.5 text-sm font-semibold text-white transition-colors duration-300 hover:bg-neutral-700">
+                About resort
+              </button>
+              <div className="flex items-center gap-2 font-medium text-neutral-700">
+                <Phone className="h-5 w-5 text-neutral-500" strokeWidth={1.5} />
+                <span>1 800 222 000</span>
+              </div>
+            </div>
           </div>
-          <div className="absolute -bottom-8 -right-4 md:-bottom-12 md:-right-8 h-[200px] w-[200px] md:h-[280px] md:w-[280px] rounded-[2rem] overflow-hidden shadow-2xl border-8 border-neutral-100 bg-neutral-200">
-            <Image
-              src="/view.jpg"
-              alt="Ocean View"
-              fill
-              className="object-cover"
-            />
+
+          {/* Images Content */}
+          <div className="relative mt-12 flex justify-end md:mt-0">
+            {/* Main Background Image */}
+            <div className="relative h-[400px] w-[85%] overflow-hidden rounded-[2rem] bg-slate-200 sm:h-[500px] md:h-[600px]">
+              <Image
+                src="/poolside_tropical.jpg"
+                alt="Belmont Resort Tropical"
+                fill
+                className="object-cover"
+              />
+            </div>
+
+            {/* Overlapping Foreground Image */}
+            <div className="absolute -bottom-8 -left-4 z-10 h-[260px] w-[260px] overflow-hidden rounded-[2rem] border-8 border-background bg-neutral-200 shadow-xl sm:-bottom-12 sm:left-4 sm:h-[320px] sm:w-[320px] md:-bottom-16 md:-left-8 md:h-[380px] md:w-[350px]">
+              <Image
+                src="/resort.jpg"
+                alt="Belmont Resort Woman"
+                fill
+                className="object-cover"
+              />
+            </div>
           </div>
         </div>
       </div>

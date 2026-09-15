@@ -5,3 +5,4 @@ export { default as FeaturedSuites } from "./FeaturedSuites";
 export { default as DiscoverDestinations } from "./DiscoverDestinations";
 export { default as CallToAction } from "./CallToAction";
 export { default as HotelAbout } from "./HotelAbout";
+export { default as HotelFeatures } from "./HotelFeatures";
