@@ -8,17 +8,18 @@ export default function HotelAbout() {
         <div className="grid grid-cols-1 items-center gap-16 md:grid-cols-2 md:gap-8 lg:gap-16">
           {/* Text Content */}
           <div className="max-w-xl">
-            <p className="mb-3 font-sans text-sm font-medium text-terra-400">
-              About resorts
+            <p className="mb-3 font-sans text-sm font-medium uppercase tracking-widest text-terra-400">
+              About Belmont
             </p>
             <h2 className="mb-6 font-serif text-4xl font-medium leading-[1.1] tracking-tight text-neutral-800 sm:text-5xl lg:text-[3.5rem]">
-              Relax at the luxury resorts around the entire world.
+              A stay designed around how you want to feel.
             </h2>
             <p className="mb-10 max-w-md font-sans text-base leading-relaxed text-neutral-500">
-              A design-led approach guides the team, implementing practices,
-              products and services that are thoughtful and environmentally
-              sound. Family of professionals that creates intelligent designs
-              that help the face of hospitality.
+              At Belmont, every detail is considered to make your stay
+              effortless. From beautifully appointed rooms and thoughtful
+              service to exceptional dining and quiet moments by the pool, we
+              bring together everything you need to slow down, settle in, and
+              enjoy your time with us.
             </p>
 
             <div className="flex flex-wrap items-center gap-6 font-sans">

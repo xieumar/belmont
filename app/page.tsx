@@ -15,8 +15,8 @@ export default function Home() {
       <HotelHero />
       <HotelAbout />
       <HotelFeatures />
-      <FeaturedSuites />
       <ExclusiveFacilities />
+      <FeaturedSuites />
       <DiscoverDestinations />
       <WhyChooseUs />
       <CallToAction />

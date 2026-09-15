@@ -2,62 +2,84 @@ import Image from "next/image";
 
 const facilities = [
   {
-    title: "Nature-Inspired Pool",
-    description: "Serene Swimming Pool with a Touch of Paradise",
+    title: "Tropical Poolside",
+    description:
+      "Relax by our pristine, nature-inspired pools designed to melt away your stress.",
     image: "/poolside_tropical.jpg",
+    className: "md:col-span-2 md:row-span-2",
   },
   {
-    title: "Integrated Tourist Area",
-    description: "Tourism integration is enhancing travel experiences",
-    image: "/resort.jpg",
+    title: "Elegant Lounge",
+    description: "Unwind in our sophisticated lounging areas.",
+    image: "/lounge.jpg",
+    className: "md:col-span-1 md:row-span-1",
   },
   {
-    title: "Window Sunset",
-    description: "From the Room, Witness the Beauty of the World",
-    image: "/poolside.jpg",
+    title: "Grand Piano",
+    description: "Live entertainment every evening in the hall.",
+    image: "/piano.jpg",
+    className: "md:col-span-1 md:row-span-1",
+  },
+  {
+    title: "Rooftop Views",
+    description: "Breathtaking scenery from the top.",
+    image: "/rooftop.jpg",
+    className: "md:col-span-1 md:row-span-1",
+  },
+  {
+    title: "Grand Hall",
+    description: "Perfect for exclusive events and gatherings.",
+    image: "/hall.jpg",
+    className: "md:col-span-2 md:row-span-1",
   },
 ];
 
 export default function ExclusiveFacilities() {
   return (
-    <section className="px-6 py-16 sm:px-8 md:py-24 lg:py-32">
+    <section className="bg-background px-6 py-16 sm:px-8 md:py-24 lg:py-32">
       <div className="mx-auto w-full max-w-7xl">
         {/* Header Section */}
-        <div className="flex flex-col gap-6 md:flex-row md:justify-between lg:gap-12 lg:items-end">
+        <div className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between lg:gap-12">
           <div className="max-w-xl">
-            <p className="text-sm font-medium text-neutral-500">
+            <p className="mb-3 font-sans text-sm font-medium uppercase tracking-widest text-terra-400">
               Premium Facilities
             </p>
-            <h2 className="mt-2 font-serif text-4xl font-medium leading-tight tracking-tight text-neutral-600 sm:text-5xl lg:text-6xl">
-              Exclusive Premium
+            <h2 className="font-serif text-4xl font-medium leading-tight tracking-tight text-neutral-800 sm:text-5xl lg:text-6xl">
+              Discover Our
               <br />
-              Facilities
+              Exclusive Spaces
             </h2>
           </div>
-          <p className="max-w-md text-base leading-relaxed text-neutral-500 md:text-lg font-sans">
-            Our exclusive amenities include a luxurious swimming pool and
-            breathtaking integrated views. Every corner is meticulously designed
-            to create an exceptional ambiance
+          <p className="max-w-md font-sans text-base leading-relaxed text-neutral-500 md:text-lg">
+            Our exclusive amenities include luxurious swimming pools,
+            breathtaking rooftop views, and meticulously designed spaces created
+            for an exceptional ambiance.
           </p>
         </div>
 
-        {/* Grid Section */}
-        <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
+        {/* Bento Grid Section */}
+        <div
+          className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-6"
+          style={{ gridAutoRows: "300px" }}
+        >
           {facilities.map((facility) => (
-            <div key={facility.title} className="group flex flex-col gap-5">
-              <div className="relative aspect-[3/2] w-full overflow-hidden rounded-[2rem] lg:rounded-[2.5rem]">
-                <Image
-                  src={facility.image}
-                  alt={facility.title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-              <div>
-                <h3 className="font-serif text-2xl font-medium tracking-tight text-neutral-600 sm:text-3xl">
+            <div
+              key={facility.title}
+              className={`group relative overflow-hidden rounded-3xl h-[300px] md:h-full w-full ${facility.className}`}
+            >
+              <Image
+                src={facility.image}
+                alt={facility.title}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/90 via-neutral-900/20 to-transparent transition-opacity duration-500" />
+
+              <div className="absolute bottom-0 left-0 flex h-full w-full flex-col justify-end p-6 md:p-8">
+                <h3 className="mb-2 translate-y-2 font-serif text-2xl font-medium tracking-tight text-neutral-100 transition-transform duration-500 group-hover:translate-y-0 sm:text-3xl">
                   {facility.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-neutral-500 sm:text-base pr-4 font-sans">
+                <p className="line-clamp-2 translate-y-4 font-sans text-sm leading-relaxed text-neutral-300 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 sm:text-base">
                   {facility.description}
                 </p>
               </div>
