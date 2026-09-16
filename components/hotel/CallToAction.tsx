@@ -2,7 +2,7 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { StaggerContainer, StaggerItem } from "@/components/ui/animations";
 
-export default function CallToAction() {
+export function CallToAction() {
   return (
     <section className="bg-background px-4 py-8 sm:px-8 sm:py-16">
       <div className="relative mx-auto flex w-full max-w-7xl flex-col items-start justify-between gap-10 overflow-hidden rounded-[2rem] bg-zinc-900 p-6 sm:rounded-[2.5rem] sm:p-12 lg:p-20">

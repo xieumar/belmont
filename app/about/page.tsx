@@ -3,8 +3,8 @@ import {
   OurStory,
   TheBelmontStandard,
   InsideBelmont,
-  StayAwhile,
 } from "@/components/about";
+import { CallToAction } from "@/components/hotel";
 
 export default function AboutPage() {
   return (
@@ -13,7 +13,7 @@ export default function AboutPage() {
       <OurStory />
       <TheBelmontStandard />
       <InsideBelmont />
-      <StayAwhile />
+      <CallToAction />
     </div>
   );
 }

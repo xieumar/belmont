@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { StaggerContainer, StaggerItem } from "@/components/ui/animations";
 
-export default function HotelHero() {
+export function HotelHero() {
   return (
     <section className="bg-background px-4 pb-4 pt-2 sm:px-8 sm:pb-6 sm:pt-4">
       <div className="relative mx-auto flex min-h-[70vh] sm:min-h-[75vh] lg:min-h-[85vh] w-full max-w-7xl flex-col justify-between overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] bg-background p-6 sm:p-10 md:p-16 lg:p-20">

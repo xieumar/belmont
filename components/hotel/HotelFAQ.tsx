@@ -38,7 +38,7 @@ const faqs = [
   },
 ];
 
-export default function HotelFAQ() {
+export function HotelFAQ() {
   return (
     <section className="bg-terra-400 px-6 py-16 sm:px-8 md:py-24 border-t border-terra-500/50">
       <div className="mx-auto w-full max-w-4xl">

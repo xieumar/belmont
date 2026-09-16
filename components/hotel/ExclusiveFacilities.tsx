@@ -52,7 +52,7 @@ const facilities = [
   },
 ];
 
-export default function ExclusiveFacilities() {
+export function ExclusiveFacilities() {
   return (
     <section className="bg-background px-6 py-16 sm:px-8 md:py-24 lg:py-32">
       <div className="mx-auto w-full max-w-7xl">

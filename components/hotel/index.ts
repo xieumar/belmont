@@ -1,9 +1,9 @@
-export { default as HotelHero } from "./HotelHero";
-export { default as ExclusiveFacilities } from "./ExclusiveFacilities";
-export { default as WhyChooseUs } from "./WhyChooseUs";
-export { default as SpecialOffers } from "./SpecialOffers";
-export { default as DiscoverDestinations } from "./DiscoverDestinations";
-export { default as CallToAction } from "./CallToAction";
-export { default as HotelAbout } from "./HotelAbout";
-export { default as HotelFeatures } from "./HotelFeatures";
-export { default as HotelFAQ } from "./HotelFAQ";
+export * from "./HotelHero";
+export * from "./ExclusiveFacilities";
+export * from "./WhyChooseUs";
+export * from "./SpecialOffers";
+export * from "./DiscoverDestinations";
+export * from "./CallToAction";
+export * from "./HotelAbout";
+export * from "./HotelFeatures";
+export * from "./HotelFAQ";

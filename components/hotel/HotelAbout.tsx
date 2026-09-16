@@ -8,7 +8,7 @@ import {
   staggerItemLeftVariants,
 } from "@/components/ui/animations";
 
-export default function HotelAbout() {
+export function HotelAbout() {
   return (
     <section className="bg-background px-6 py-16 sm:px-8 md:py-24">
       <div className="mx-auto w-full max-w-7xl">

@@ -56,7 +56,7 @@ const offers = [
   },
 ];
 
-export default function SpecialOffers() {
+export function SpecialOffers() {
   return (
     <section className="bg-terra-400 px-6 py-16 sm:px-8 md:py-24">
       <div className="mx-auto w-full max-w-7xl">

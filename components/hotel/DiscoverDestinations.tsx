@@ -58,7 +58,7 @@ const rooms = [
   },
 ];
 
-export default function DiscoverDestinations() {
+export function DiscoverDestinations() {
   const [activeTab, setActiveTab] = useState(2); // Default to "03 Premium pavilions"
 
   const activeRoom = rooms[activeTab];
