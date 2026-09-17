@@ -15,6 +15,7 @@ export function WellnessAndSpa() {
               src="/massage.jpg"
               alt="Spa and Wellness at Belmont"
               fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
             />
           </SlideInLeft>

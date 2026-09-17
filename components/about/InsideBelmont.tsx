@@ -25,6 +25,7 @@ export default function InsideBelmont() {
               src="/lounge.jpg"
               alt="Belmont Lounge"
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </SlideInLeft>
@@ -38,6 +39,7 @@ export default function InsideBelmont() {
               src="/sauna.jpg"
               alt="Sauna"
               fill
+              sizes="(max-width: 768px) 100vw, 25vw"
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </SlideInRight>
@@ -51,6 +53,7 @@ export default function InsideBelmont() {
               src="/gym.jpg"
               alt="Fitness Center"
               fill
+              sizes="(max-width: 768px) 100vw, 25vw"
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </SlideInRight>
@@ -64,6 +67,7 @@ export default function InsideBelmont() {
               src="/poolside_tropical.jpg"
               alt="Tropical Poolside"
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </SlideInRight>
@@ -77,6 +81,7 @@ export default function InsideBelmont() {
               src="/massage.jpg"
               alt="Spa & Massage"
               fill
+              sizes="(max-width: 768px) 100vw, 25vw"
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </SlideUp>
@@ -90,6 +95,7 @@ export default function InsideBelmont() {
               src="/bar.jpg"
               alt="Belmont Bar"
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </SlideUp>
@@ -103,6 +109,7 @@ export default function InsideBelmont() {
               src="/hall.jpg"
               alt="Grand Hall"
               fill
+              sizes="(max-width: 768px) 100vw, 25vw"
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </SlideInRight>

@@ -15,6 +15,7 @@ export function FitnessCenter() {
               src="/gym.jpg"
               alt="Belmont Fitness Center"
               fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
             />
           </SlideInLeft>

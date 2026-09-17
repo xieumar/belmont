@@ -9,6 +9,7 @@ export function FacilitiesHero() {
           src="/rooftop.jpg"
           alt="Belmont Facilities"
           fill
+          sizes="100vw"
           className="object-cover opacity-[0.15]"
           priority
         />

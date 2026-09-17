@@ -15,6 +15,7 @@ export function DiningAndLounge() {
               src="/bar.jpg"
               alt="Belmont Dining and Lounge"
               fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
             />
           </SlideInLeft>

@@ -25,6 +25,7 @@ export function FacilitiesGallery() {
               src="/rooftopview.jpg"
               alt="Rooftop View"
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </SlideInLeft>
@@ -38,6 +39,7 @@ export function FacilitiesGallery() {
               src="/food.jpg"
               alt="Culinary Delights"
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </SlideInRight>
@@ -51,6 +53,7 @@ export function FacilitiesGallery() {
               src="/saunawomen.jpg"
               alt="Wellness Sauna"
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </SlideInRight>
@@ -64,6 +67,7 @@ export function FacilitiesGallery() {
               src="/restaurant.jpg"
               alt="Restaurant Interior"
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </SlideInRight>
@@ -77,6 +81,7 @@ export function FacilitiesGallery() {
               src="/poolseats.jpg"
               alt="Poolside Seating"
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </SlideUp>
@@ -90,6 +95,7 @@ export function FacilitiesGallery() {
               src="/poolview.jpg"
               alt="Pool View"
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </SlideUp>

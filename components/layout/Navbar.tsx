@@ -30,7 +30,7 @@ export default function Navbar() {
             alt="Belmont Hotel Logo"
             width={64}
             height={64}
-            className="object-contain -translate-y-1"
+            className="object-contain w-auto h-auto -translate-y-1"
           />
           <span className="translate-y-1">Belmont Hotel</span>
         </Link>

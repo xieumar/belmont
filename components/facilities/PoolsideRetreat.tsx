@@ -15,6 +15,7 @@ export function PoolsideRetreat() {
               src="/poolside_tropical.jpg"
               alt="Belmont Tropical Poolside"
               fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
             />
           </SlideInRight>
