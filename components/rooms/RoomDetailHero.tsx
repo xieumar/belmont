@@ -2,6 +2,7 @@ import { StaggerContainer, StaggerItem } from "@/components/ui/animations";
 import Image from "next/image";
 import { Room } from "@/data/rooms";
 import { buttonVariants } from "@/components/ui/button";
+import { formatPrice } from "@/lib/utils";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
@@ -64,7 +65,7 @@ export function RoomDetailHero({ room }: RoomDetailHeroProps) {
                     Starting from
                   </span>
                   <span className="text-neutral-900 font-serif text-4xl">
-                    {room.price}
+                    {formatPrice(room.nightlyRate)} / night
                   </span>
                 </div>
                 <button

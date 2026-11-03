@@ -6,7 +6,11 @@ export interface FeatureCategory {
 export interface Room {
   id: string;
   name: string;
-  price: string;
+  nightlyRate: number; // minor units (cents)
+  maxAdults: number;
+  maxChildren: number;
+  maxGuests: number;
+  units: number; // physical rooms of this type
   shortDescription: string;
   longDescription: string;
   primaryImage: string;
@@ -25,7 +29,11 @@ export const rooms: Room[] = [
   {
     id: "deluxe-king",
     name: "Deluxe King Room",
-    price: "$350 / night",
+    nightlyRate: 35000,
+    maxAdults: 2,
+    maxChildren: 0,
+    maxGuests: 2,
+    units: 5,
     shortDescription:
       "A spacious room with a king-size bed and stunning city views.",
     longDescription:
@@ -88,7 +96,11 @@ export const rooms: Room[] = [
   {
     id: "ocean-view-suite",
     name: "Ocean View Suite",
-    price: "$550 / night",
+    nightlyRate: 55000,
+    maxAdults: 2,
+    maxChildren: 0,
+    maxGuests: 2,
+    units: 2,
     shortDescription:
       "Elegant suite featuring panoramic ocean views and a private balcony.",
     longDescription:
@@ -155,7 +167,11 @@ export const rooms: Room[] = [
   {
     id: "executive-twin",
     name: "Executive Twin Room",
-    price: "$380 / night",
+    nightlyRate: 38000,
+    maxAdults: 2,
+    maxChildren: 0,
+    maxGuests: 2,
+    units: 5,
     shortDescription:
       "Ideal for business or leisure travelers requiring twin beds with premium amenities.",
     longDescription:
@@ -215,7 +231,11 @@ export const rooms: Room[] = [
   {
     id: "belmont-penthouse",
     name: "The Belmont Penthouse",
-    price: "$1,200 / night",
+    nightlyRate: 120000,
+    maxAdults: 2,
+    maxChildren: 0,
+    maxGuests: 2,
+    units: 1,
     shortDescription:
       "Our signature penthouse offering unparalleled luxury and space.",
     longDescription:
@@ -280,7 +300,11 @@ export const rooms: Room[] = [
   {
     id: "family-suite",
     name: "Family Garden Suite",
-    price: "$480 / night",
+    nightlyRate: 48000,
+    maxAdults: 2,
+    maxChildren: 2,
+    maxGuests: 4,
+    units: 2,
     shortDescription:
       "Spacious suite designed for families, featuring direct garden access.",
     longDescription:
@@ -345,7 +369,11 @@ export const rooms: Room[] = [
   {
     id: "presidential-suite",
     name: "Presidential Suite",
-    price: "$2,500 / night",
+    nightlyRate: 250000,
+    maxAdults: 2,
+    maxChildren: 0,
+    maxGuests: 2,
+    units: 1,
     shortDescription:
       "The ultimate Belmont experience with unparalleled luxury, space, and a private dining room.",
     longDescription:
