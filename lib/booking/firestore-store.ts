@@ -13,8 +13,6 @@ import {
 } from "./store";
 import type { StayDates } from "./types";
 
-const BOOKINGS = "bookings";
-const INVENTORY = "inventory";
 const MAX_REFERENCE_ATTEMPTS = 5;
 
 interface RoomInventory {
@@ -57,21 +55,30 @@ function toDTO({ emailKey: _emailKey, ...dto }: BookingDoc): BookingDTO {
 export class FirestoreBookingStore implements BookingStore {
   constructor(
     private readonly db: Firestore,
-    private readonly rooms: RoomInventory[] = defaultRooms
+    private readonly rooms: RoomInventory[] = defaultRooms,
+    /** Prefixes collection names, e.g. "test_" keeps tests off real data. */
+    private readonly collectionPrefix = ""
   ) {}
 
+  private get bookings() {
+    return this.db.collection(`${this.collectionPrefix}bookings`);
+  }
+
+  private get inventory() {
+    return this.db.collection(`${this.collectionPrefix}inventory`);
+  }
+
   private inventoryRef(roomId: string, date: string): DocumentReference {
-    return this.db.collection(INVENTORY).doc(`${roomId}_${date}`);
+    return this.inventory.doc(`${roomId}_${date}`);
   }
 
   private bookingRef(reference: string): DocumentReference {
-    return this.db.collection(BOOKINGS).doc(reference.trim().toUpperCase());
+    return this.bookings.doc(reference.trim().toUpperCase());
   }
 
   async getAvailability(stay: StayDates): Promise<Availability> {
     // A single range query on `date`; the automatic index is enough.
-    const snapshot = await this.db
-      .collection(INVENTORY)
+    const snapshot = await this.inventory
       .where("date", ">=", stay.checkIn)
       .where("date", "<", stay.checkOut)
       .get();

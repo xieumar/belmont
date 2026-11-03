@@ -8,12 +8,6 @@ function createApp(): App {
     throw new Error("FIREBASE_PROJECT_ID is not set");
   }
 
-  // The emulator needs no credentials; the Admin SDK reads
-  // FIRESTORE_EMULATOR_HOST on its own.
-  if (process.env.FIRESTORE_EMULATOR_HOST) {
-    return initializeApp({ projectId });
-  }
-
   const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
   const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n");
   if (!clientEmail || !privateKey) {

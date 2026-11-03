@@ -5,7 +5,8 @@ export default defineConfig({
   test: {
     environment: "node",
     include: ["**/*.test.ts"],
-    exclude: ["node_modules", ".next"],
+    // Integration tests need Firebase credentials; run them with `test:int`.
+    exclude: ["node_modules", ".next", "**/*.int.test.ts"],
   },
   resolve: {
     alias: { "@": path.resolve(__dirname) },
