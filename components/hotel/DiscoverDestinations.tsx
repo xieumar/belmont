@@ -13,7 +13,6 @@ const rooms = [
     title: "Premium cottage",
     description:
       "Experience the ultimate comfort in our secluded cottage with beautiful garden views and rustic charm.",
-    price: "$35.00",
     image: "/room1.jpg",
   },
   {
@@ -23,7 +22,6 @@ const rooms = [
     title: "Studios with terrace",
     description:
       "Enjoy a spacious open-plan layout featuring a private terrace perfect for evening relaxation.",
-    price: "$40.00",
     image: "/room.jpg",
   },
   {
@@ -33,7 +31,6 @@ const rooms = [
     title: "Premium pavilions",
     description:
       "Discover a private home in the orchard three bedrooms and baths with a private plunge pool and service and a three sided view from the king size bed.",
-    price: "$50.00",
     image: "/room2.jpg",
   },
   {
@@ -43,7 +40,6 @@ const rooms = [
     title: "The luxury villa",
     description:
       "A breathtaking villa designed for grandeur, featuring exquisite interiors and sweeping panoramic views.",
-    price: "$95.00",
     image: "/room3.jpg",
   },
   {
@@ -53,7 +49,6 @@ const rooms = [
     title: "Grand deluxe room",
     description:
       "Our largest room option boasting premium amenities, sophisticated decor, and unparalleled service.",
-    price: "$75.00",
     image: "/room4.jpg",
   },
 ];
@@ -102,16 +97,8 @@ export function DiscoverDestinations() {
             fill
             className="object-cover"
           />
-          {/* Price Widget */}
+          {/* Book Widget */}
           <div className="absolute bottom-0 left-1/2 flex -translate-x-1/2 shadow-xl lg:left-1/2 lg:-translate-x-1/2">
-            <div className="flex min-w-[140px] flex-col justify-center bg-white px-6 py-4 lg:min-w-[180px] lg:px-8 lg:py-5">
-              <p className="mb-1 font-sans text-xs uppercase tracking-wider text-neutral-400">
-                Starting from
-              </p>
-              <p className="font-serif text-2xl font-medium text-neutral-900 lg:text-3xl">
-                {activeRoom.price}
-              </p>
-            </div>
             <button className="group flex items-center justify-center gap-4 bg-[#2D2D2D] px-6 py-4 text-white transition-colors hover:bg-black lg:px-8 lg:py-5">
               <span className="w-12 text-left text-xs font-bold leading-tight tracking-widest uppercase lg:text-sm">
                 Book

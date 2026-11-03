@@ -3,6 +3,7 @@ import Link from "next/link";
 import { SlideUp } from "@/components/ui/animations";
 import { Room } from "@/data/rooms";
 import { buttonVariants } from "@/components/ui/button";
+import { formatPrice } from "@/lib/utils";
 
 interface RoomCardProps {
   room: Room;
@@ -47,7 +48,7 @@ export function RoomCard({ room, index }: RoomCardProps) {
           <div className="flex items-center justify-between border-t border-neutral-200/60 p-8 sm:px-10 lg:px-12 sm:py-8 bg-[#F5F3EF]">
             <div className="flex items-baseline gap-1.5">
               <span className="font-serif text-3xl lg:text-4xl font-semibold text-neutral-900">
-                {room.price.split(" / ")[0]}
+                {formatPrice(room.nightlyRate)}
               </span>
               <span className="font-sans text-sm text-neutral-600">
                 Per night

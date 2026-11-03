@@ -19,7 +19,6 @@ const offers = [
     title: "Stay Longer, Slow Down",
     description:
       "Enjoy a relaxing weekend at Belmont with a beautifully appointed room, daily breakfast, and a little more time to yourself.",
-    price: "From $185 / night",
     image: "/room1.jpg",
   },
   {
@@ -27,7 +26,6 @@ const offers = [
     title: "An Evening to Remember",
     description:
       "Settle into your room, then let us take care of dinner. Enjoy a luxurious overnight stay paired with a curated dining experience for two.",
-    price: "From $250 / night",
     image: "/rooftop.jpg",
   },
   {
@@ -35,7 +33,6 @@ const offers = [
     title: "Your Time to Unwind",
     description:
       "Take a break from the everyday with a peaceful stay, signature spa treatment, and access to our wellness facilities.",
-    price: "From $220 / night",
     image: "/poolside_tropical.jpg",
   },
   {
@@ -43,7 +40,6 @@ const offers = [
     title: "Reconnect & Recharge",
     description:
       "Escape the noise with guided outdoor tours, serene spaces, and evening stargazing. Find your perfect balance in nature.",
-    price: "From $190 / night",
     image: "/view.jpg",
   },
   {
@@ -51,7 +47,6 @@ const offers = [
     title: "The Nomad Experience",
     description:
       "Designed for the remote worker. Enjoy premium connectivity, quiet lounging areas, and vibrant evening entertainment.",
-    price: "From $210 / night",
     image: "/lounge2.jpg",
   },
 ];
@@ -135,10 +130,7 @@ export function SpecialOffers() {
                         <p className="mb-8 flex-1 font-sans text-sm leading-relaxed text-terra-100 sm:text-base">
                           {offer.description}
                         </p>
-                        <div className="flex items-center justify-between border-t border-terra-300 pt-5 mt-auto">
-                          <span className="font-serif text-lg sm:text-xl">
-                            {offer.price}
-                          </span>
+                        <div className="flex items-center justify-end border-t border-terra-300 pt-5 mt-auto">
                           <button className="font-sans text-sm font-semibold uppercase tracking-wider text-neutral-100 transition-colors hover:text-terra-200">
                             Explore Offer
                           </button>
