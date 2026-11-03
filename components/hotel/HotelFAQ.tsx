@@ -14,7 +14,7 @@ const faqs = [
   {
     question: "What time is check-in and check-out?",
     answer:
-      "Check-in begins at 3:00 PM and check-out is at 11:00 AM. Early check-in or late check-out can be arranged with our concierge, subject to availability.",
+      "Check-in begins at 3:00 PM and check-out is at 12:00 PM. Early check-in or late check-out can be arranged with our concierge, subject to availability.",
   },
   {
     question: "Do you offer airport transfers?",
@@ -29,7 +29,7 @@ const faqs = [
   {
     question: "Are pets allowed at the resort?",
     answer:
-      "We are proudly pet-friendly! We welcome well-behaved pets and even offer special pet amenities upon request. A standard deep-cleaning fee applies to all pet stays.",
+      "Unfortunately, pets are not allowed at the resort. Service animals are welcome; please contact us before your stay so we can make arrangements.",
   },
   {
     question: "Can I host a private event or wedding?",
