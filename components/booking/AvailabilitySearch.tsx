@@ -5,14 +5,13 @@ import { GuestStepper } from "@/components/booking/GuestStepper";
 import { Button } from "@/components/ui/button";
 import { FormField } from "@/components/ui/form-field";
 import { Input } from "@/components/ui/input";
-import { hotel } from "@/data/hotel";
 import {
   addDays,
   hotelToday,
   isValidDateString,
   validateStayDates,
-  type StayDatesError,
 } from "@/lib/booking/dates";
+import { STAY_DATES_MESSAGES } from "@/lib/booking/search";
 
 export interface AvailabilitySearchValues {
   checkIn: string;
@@ -30,14 +29,6 @@ interface AvailabilitySearchProps {
 }
 
 const MAX_GUESTS_PER_TYPE = 10;
-
-const DATE_MESSAGES: Record<StayDatesError, string> = {
-  "invalid-date": "Choose a check-in and check-out date.",
-  "checkout-not-after-checkin": "Check-out must be after check-in.",
-  "in-the-past": "Check-in can't be in the past.",
-  "stay-too-long": `Stays are limited to ${hotel.maxStayNights} nights.`,
-  "too-far-ahead": `We take bookings up to ${hotel.maxAdvanceDays} days ahead.`,
-};
 
 export function AvailabilitySearch({
   defaultValues,
@@ -67,7 +58,7 @@ export function AvailabilitySearch({
     const problem = validateStayDates({ checkIn, checkOut });
     if (problem) {
       event.preventDefault();
-      setError(DATE_MESSAGES[problem]);
+      setError(STAY_DATES_MESSAGES[problem]);
     }
   }
 
