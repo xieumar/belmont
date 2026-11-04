@@ -1,7 +1,25 @@
 import { StaggerContainer, StaggerItem } from "@/components/ui/animations";
 import Image from "next/image";
+import { AvailabilitySearch } from "@/components/booking/AvailabilitySearch";
+import { rooms } from "@/data/rooms";
+import type { SearchState } from "@/lib/booking/search";
+import { ROOM_RESULTS_ID } from "./RoomList";
 
-export function RoomsHero() {
+const capacities = rooms.map(({ maxAdults, maxChildren, maxGuests }) => ({
+  maxAdults,
+  maxChildren,
+  maxGuests,
+}));
+
+interface RoomsHeroProps {
+  /** The visitor's current search, used to pre-fill the form. */
+  search?: SearchState;
+}
+
+export function RoomsHero({ search }: RoomsHeroProps) {
+  const defaultValues =
+    search?.status === "ok" ? { ...search.stay, ...search.guests } : undefined;
+
   return (
     <section className="bg-background px-4 pb-6 pt-2 sm:px-8 sm:pb-8 sm:pt-4">
       <div className="relative mx-auto flex min-h-[70vh] sm:min-h-[75vh] lg:min-h-[85vh] w-full max-w-7xl flex-col justify-center overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] bg-background p-6 sm:p-10 md:p-16 lg:p-20">
@@ -40,6 +58,17 @@ export function RoomsHero() {
             </p>
           </StaggerItem>
         </StaggerContainer>
+
+        <div className="relative z-10 mt-8 w-full max-w-xl rounded-3xl bg-white p-5 shadow-xl sm:mt-10 sm:p-6">
+          <h2 className="mb-4 font-serif text-xl font-medium text-neutral-900">
+            Check availability
+          </h2>
+          <AvailabilitySearch
+            defaultValues={defaultValues}
+            capacities={capacities}
+            resultsId={ROOM_RESULTS_ID}
+          />
+        </div>
       </div>
     </section>
   );

@@ -10,7 +10,8 @@ interface GuestStepperProps {
   description?: string;
   value: number;
   min: number;
-  max: number;
+  /** False once one more guest would not fit in any room. */
+  canIncrease: boolean;
   onChange: (value: number) => void;
 }
 
@@ -20,7 +21,7 @@ export function GuestStepper({
   description,
   value,
   min,
-  max,
+  canIncrease,
   onChange,
 }: GuestStepperProps) {
   return (
@@ -55,8 +56,8 @@ export function GuestStepper({
           variant="outline"
           size="icon"
           aria-label={`Increase ${label.toLowerCase()}`}
-          disabled={value >= max}
-          onClick={() => onChange(Math.min(max, value + 1))}
+          disabled={!canIncrease}
+          onClick={() => onChange(value + 1)}
         >
           <Plus aria-hidden="true" />
         </Button>

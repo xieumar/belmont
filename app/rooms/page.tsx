@@ -11,7 +11,7 @@ export default async function RoomsPage({
 
   return (
     <div className="flex flex-col flex-1 overflow-x-hidden bg-white">
-      <RoomsHero />
+      <RoomsHero search={roomsSearch.search} />
       <HotelFeatures />
       <RoomsIntro />
       <RoomList roomsSearch={roomsSearch} />

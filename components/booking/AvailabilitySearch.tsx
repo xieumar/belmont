@@ -1,16 +1,21 @@
 "use client";
 
-import { useId, useState, type FormEvent } from "react";
+import {
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  useTransition,
+  type FormEvent,
+} from "react";
+import { useRouter } from "next/navigation";
+import { DateRangePicker } from "@/components/booking/DateRangePicker";
 import { GuestStepper } from "@/components/booking/GuestStepper";
 import { Button } from "@/components/ui/button";
 import { FormField } from "@/components/ui/form-field";
-import { Input } from "@/components/ui/input";
-import {
-  addDays,
-  hotelToday,
-  isValidDateString,
-  validateStayDates,
-} from "@/lib/booking/dates";
+import type { Room } from "@/data/rooms";
+import { checkCapacity } from "@/lib/booking/capacity";
+import { validateStayDates } from "@/lib/booking/dates";
 import { STAY_DATES_MESSAGES } from "@/lib/booking/search";
 
 export interface AvailabilitySearchValues {
@@ -20,89 +25,111 @@ export interface AvailabilitySearchValues {
   children: number;
 }
 
+type RoomCapacity = Pick<Room, "maxAdults" | "maxChildren" | "maxGuests">;
+
 interface AvailabilitySearchProps {
   /** Pre-filled values, e.g. the current search. */
   defaultValues?: Partial<AvailabilitySearchValues>;
-  /** Where the GET form submits to. */
+  /** Page the search is submitted to. */
   action?: string;
+  /** Element id to scroll to once the results have loaded. */
+  resultsId?: string;
+  /**
+   * Capacities of the rooms being searched. Guest steppers stop where no room
+   * could fit one more guest. Without it, only the schema's limit applies.
+   */
+  capacities?: RoomCapacity[];
   className?: string;
 }
 
-const MAX_GUESTS_PER_TYPE = 10;
+/** The schema's upper bound, used when no room capacities are given. */
+const FALLBACK_MAX_PER_TYPE = 10;
 
 export function AvailabilitySearch({
   defaultValues,
   action = "/rooms",
+  resultsId,
+  capacities,
   className,
 }: AvailabilitySearchProps) {
   const id = useId();
-  const [checkIn, setCheckIn] = useState(defaultValues?.checkIn ?? "");
-  const [checkOut, setCheckOut] = useState(defaultValues?.checkOut ?? "");
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+  const [dates, setDates] = useState({
+    checkIn: defaultValues?.checkIn ?? "",
+    checkOut: defaultValues?.checkOut ?? "",
+  });
   const [adults, setAdults] = useState(defaultValues?.adults ?? 2);
   const [children, setChildren] = useState(defaultValues?.children ?? 0);
   const [error, setError] = useState<string>();
 
-  const today = hotelToday();
-  const checkOutMin = isValidDateString(checkIn) ? addDays(checkIn, 1) : today;
+  const canFit = (a: number, c: number) =>
+    capacities
+      ? capacities.some(
+          (room) => checkCapacity(room, { adults: a, children: c }) === null
+        )
+      : a <= FALLBACK_MAX_PER_TYPE && c <= FALLBACK_MAX_PER_TYPE;
+  const maxGuestsPerRoom = capacities
+    ? Math.max(...capacities.map((room) => room.maxGuests))
+    : undefined;
 
-  function handleCheckIn(value: string) {
-    setCheckIn(value);
-    setError(undefined);
-    // Keep the stay valid: check-out must stay after the new check-in.
-    if (isValidDateString(value) && checkOut && checkOut <= value) {
-      setCheckOut(addDays(value, 1));
+  // Scroll to the results once the new search has finished loading.
+  const wasPending = useRef(false);
+  useEffect(() => {
+    if (wasPending.current && !isPending && resultsId) {
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+      document
+        .getElementById(resultsId)
+        ?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
     }
-  }
+    wasPending.current = isPending;
+  }, [isPending, resultsId]);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    const problem = validateStayDates({ checkIn, checkOut });
+    event.preventDefault();
+    const problem = validateStayDates(dates);
     if (problem) {
-      event.preventDefault();
       setError(STAY_DATES_MESSAGES[problem]);
+      return;
     }
+    setError(undefined);
+    const query = new URLSearchParams({
+      ...dates,
+      adults: String(adults),
+      children: String(children),
+    });
+    startTransition(() => {
+      router.push(`${action}?${query}${resultsId ? `#${resultsId}` : ""}`, {
+        scroll: false,
+      });
+    });
   }
 
   return (
     <form
-      action={action}
+      // Without JavaScript this still works as a plain GET form.
+      action={resultsId ? `${action}#${resultsId}` : action}
       method="get"
       noValidate
       onSubmit={handleSubmit}
       className={className}
     >
-      <div className="grid gap-4 sm:grid-cols-2">
-        <FormField id={`${id}-check-in`} label="Check-in">
-          {(control) => (
-            <Input
-              {...control}
-              type="date"
-              name="checkIn"
-              required
-              min={today}
-              value={checkIn}
-              onChange={(event) => handleCheckIn(event.target.value)}
-              className="h-10"
-            />
-          )}
-        </FormField>
-        <FormField id={`${id}-check-out`} label="Check-out">
-          {(control) => (
-            <Input
-              {...control}
-              type="date"
-              name="checkOut"
-              required
-              min={checkOutMin}
-              value={checkOut}
-              onChange={(event) => {
-                setCheckOut(event.target.value);
-                setError(undefined);
-              }}
-              className="h-10"
-            />
-          )}
-        </FormField>
-      </div>
+      <FormField id={`${id}-dates`} label="Dates" error={error}>
+        {(control) => (
+          <DateRangePicker
+            {...control}
+            value={dates}
+            onChange={(next) => {
+              setDates(next);
+              setError(undefined);
+            }}
+          />
+        )}
+      </FormField>
+      <input type="hidden" name="checkIn" value={dates.checkIn} />
+      <input type="hidden" name="checkOut" value={dates.checkOut} />
 
       <div className="mt-4 grid gap-4">
         <GuestStepper
@@ -110,7 +137,7 @@ export function AvailabilitySearch({
           label="Adults"
           value={adults}
           min={1}
-          max={MAX_GUESTS_PER_TYPE}
+          canIncrease={canFit(adults + 1, children)}
           onChange={setAdults}
         />
         <GuestStepper
@@ -118,19 +145,25 @@ export function AvailabilitySearch({
           label="Children"
           value={children}
           min={0}
-          max={MAX_GUESTS_PER_TYPE}
+          canIncrease={canFit(adults, children + 1)}
           onChange={setChildren}
         />
       </div>
 
-      {error ? (
-        <p role="alert" className="mt-4 text-sm text-destructive">
-          {error}
+      {maxGuestsPerRoom ? (
+        <p className="mt-3 text-xs text-neutral-500">
+          Our largest room sleeps up to {maxGuestsPerRoom} guests.
         </p>
       ) : null}
 
-      <Button type="submit" size="lg" className="mt-5 h-11 w-full">
-        Check availability
+      <Button
+        type="submit"
+        size="lg"
+        disabled={isPending}
+        aria-busy={isPending}
+        className="mt-5 h-11 w-full"
+      >
+        {isPending ? "Checking availability…" : "Check availability"}
       </Button>
     </form>
   );
