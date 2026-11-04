@@ -1,5 +1,6 @@
 import { rooms } from "@/data/rooms";
 import type { RoomsSearch } from "@/lib/booking/load-search";
+import { roomStayState } from "@/lib/booking/room-search";
 import { RoomCard } from "./RoomCard";
 import { SearchNotice } from "./SearchNotice";
 
@@ -24,7 +25,20 @@ export function RoomList({ roomsSearch }: RoomListProps) {
         <SearchNotice message={noticeFor(roomsSearch)} />
         <div className="flex flex-col gap-12 sm:gap-16">
           {rooms.map((room, index) => (
-            <RoomCard key={room.id} room={room} index={index} />
+            <RoomCard
+              key={room.id}
+              room={room}
+              index={index}
+              stay={
+                roomsSearch
+                  ? roomStayState(
+                      room,
+                      roomsSearch.search,
+                      roomsSearch.availability
+                    )
+                  : undefined
+              }
+            />
           ))}
         </div>
       </div>
