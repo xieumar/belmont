@@ -151,7 +151,11 @@ export class FirestoreBookingStore implements BookingStore {
         checkOut: input.stay.checkOut,
         adults: input.guests.adults,
         children: input.guests.children,
-        guest: { ...input.guest },
+        // Firestore rejects `undefined` values, and optional fields such as
+        // specialRequests are undefined when the guest leaves them blank.
+        guest: Object.fromEntries(
+          Object.entries(input.guest).filter(([, value]) => value !== undefined)
+        ) as BookingDoc["guest"],
         price: { ...input.price },
         status: "confirmed",
         createdAt: new Date().toISOString(),

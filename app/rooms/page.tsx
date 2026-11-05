@@ -1,13 +1,20 @@
 import { RoomsHero, RoomList, RoomsIntro } from "@/components/rooms";
 import { CallToAction, HotelFeatures } from "@/components/hotel";
+import { loadRoomsSearch } from "@/lib/booking/load-search";
 
-export default function RoomsPage() {
+export default async function RoomsPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const roomsSearch = await loadRoomsSearch(await searchParams);
+
   return (
     <div className="flex flex-col flex-1 overflow-x-hidden bg-white">
-      <RoomsHero />
+      <RoomsHero search={roomsSearch.search} />
       <HotelFeatures />
       <RoomsIntro />
-      <RoomList />
+      <RoomList roomsSearch={roomsSearch} />
       <CallToAction />
     </div>
   );

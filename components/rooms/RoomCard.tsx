@@ -3,14 +3,24 @@ import Link from "next/link";
 import { SlideUp } from "@/components/ui/animations";
 import { Room } from "@/data/rooms";
 import { buttonVariants } from "@/components/ui/button";
+import type { RoomStayState } from "@/lib/booking/room-search";
 import { formatPrice } from "@/lib/utils";
 
 interface RoomCardProps {
   room: Room;
   index: number;
+  /** How this room fares for the visitor's search. Defaults to no search. */
+  stay?: RoomStayState;
 }
 
-export function RoomCard({ room, index }: RoomCardProps) {
+const ctaClassName =
+  "bg-[#A98E67] hover:bg-[#917955] text-white rounded-full px-6 lg:px-8 font-medium";
+
+export function RoomCard({
+  room,
+  index,
+  stay = { kind: "default" },
+}: RoomCardProps) {
   return (
     <SlideUp delay={index * 0.1} className="h-full">
       <article
@@ -45,26 +55,77 @@ export function RoomCard({ room, index }: RoomCardProps) {
             </p>
           </div>
 
-          <div className="flex items-center justify-between border-t border-neutral-200/60 p-8 sm:px-10 lg:px-12 sm:py-8 bg-[#F5F3EF]">
-            <div className="flex items-baseline gap-1.5">
-              <span className="font-serif text-3xl lg:text-4xl font-semibold text-neutral-900">
-                {formatPrice(room.nightlyRate)}
+          <div className="flex flex-wrap items-center justify-between gap-4 border-t border-neutral-200/60 p-8 sm:px-10 lg:px-12 sm:py-8 bg-[#F5F3EF]">
+            {stay.kind === "available" ? (
+              <div>
+                <div className="flex items-baseline gap-1.5">
+                  <span className="font-serif text-3xl lg:text-4xl font-semibold text-neutral-900">
+                    {formatPrice(stay.price.total, stay.price.currency)}
+                  </span>
+                  <span className="font-sans text-sm text-neutral-600">
+                    total for {stay.price.nights}{" "}
+                    {stay.price.nights === 1 ? "night" : "nights"}
+                  </span>
+                </div>
+                <p className="mt-1 font-sans text-sm text-neutral-600">
+                  {formatPrice(room.nightlyRate)} per night
+                  {stay.unitsLeft <= 2 ? ` · Only ${stay.unitsLeft} left` : ""}
+                </p>
+              </div>
+            ) : stay.kind === "unavailable" ? (
+              <div>
+                <p className="font-serif text-xl font-semibold text-neutral-900">
+                  Unavailable for these dates
+                </p>
+                <p className="mt-1 font-sans text-sm text-neutral-600">
+                  {formatPrice(room.nightlyRate)} per night
+                </p>
+              </div>
+            ) : stay.kind === "exceeds-capacity" ? (
+              <div>
+                <p className="font-serif text-xl font-semibold text-neutral-900">
+                  Exceeds capacity
+                </p>
+                <p className="mt-1 font-sans text-sm text-neutral-600">
+                  Sleeps up to {room.maxGuests} guests
+                </p>
+              </div>
+            ) : (
+              <div className="flex items-baseline gap-1.5">
+                <span className="font-serif text-3xl lg:text-4xl font-semibold text-neutral-900">
+                  {formatPrice(room.nightlyRate)}
+                </span>
+                <span className="font-sans text-sm text-neutral-600">
+                  Per night
+                </span>
+              </div>
+            )}
+            {stay.kind === "unavailable" || stay.kind === "exceeds-capacity" ? (
+              <span
+                aria-disabled="true"
+                className={buttonVariants({
+                  variant: "secondary",
+                  size: "lg",
+                  className:
+                    "cursor-not-allowed rounded-full px-6 lg:px-8 font-medium opacity-60",
+                })}
+              >
+                Not available
               </span>
-              <span className="font-sans text-sm text-neutral-600">
-                Per night
-              </span>
-            </div>
-            <Link
-              href={`/rooms/${room.id}`}
-              className={buttonVariants({
-                variant: "default",
-                size: "lg",
-                className:
-                  "bg-[#A98E67] hover:bg-[#917955] text-white rounded-full px-6 lg:px-8 font-medium",
-              })}
-            >
-              Book your stay
-            </Link>
+            ) : (
+              <Link
+                href={
+                  stay.kind === "available" ? stay.href : `/rooms/${room.id}`
+                }
+                className={buttonVariants({
+                  variant: "default",
+                  size: "lg",
+                  className: ctaClassName,
+                })}
+              >
+                Book your stay
+              </Link>
+            )}
           </div>
         </div>
       </article>

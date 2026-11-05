@@ -1,16 +1,43 @@
 import { StaggerContainer, StaggerItem } from "@/components/ui/animations";
 import Image from "next/image";
+import { AvailabilitySearch } from "@/components/booking/AvailabilitySearch";
+import { PriceBreakdown } from "@/components/booking/PriceBreakdown";
 import { Room } from "@/data/rooms";
 import { buttonVariants } from "@/components/ui/button";
+import type { RoomsSearch } from "@/lib/booking/load-search";
+import { roomStayState } from "@/lib/booking/room-search";
 import { formatPrice } from "@/lib/utils";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
+/** Anchor the search form scrolls to once the room's result is ready. */
+const BOOKING_CARD_ID = "room-booking";
+
 interface RoomDetailHeroProps {
   room: Room;
+  /** The visitor's search, if any. Without it only the picker is shown. */
+  roomsSearch?: RoomsSearch;
 }
 
-export function RoomDetailHero({ room }: RoomDetailHeroProps) {
+/** What to tell the visitor when there is no bookable result to show. */
+function bookingMessage(room: Room, roomsSearch?: RoomsSearch) {
+  const search = roomsSearch?.search;
+  if (!search || search.status === "none") {
+    return "Choose your dates to see the total and book this room.";
+  }
+  if (search.status === "invalid") return search.error;
+  if (roomsSearch?.availabilityError) {
+    return "We couldn't check availability right now. Please try again in a moment.";
+  }
+  return `This room sleeps up to ${room.maxGuests} guests.`;
+}
+
+export function RoomDetailHero({ room, roomsSearch }: RoomDetailHeroProps) {
+  const stay = roomsSearch
+    ? roomStayState(room, roomsSearch.search, roomsSearch.availability)
+    : ({ kind: "default" } as const);
+  const search = roomsSearch?.search;
+
   return (
     <section className="relative flex min-h-[80vh] flex-col justify-end overflow-hidden bg-background">
       <div className="absolute inset-0 z-0">
@@ -58,25 +85,78 @@ export function RoomDetailHero({ room }: RoomDetailHeroProps) {
               </StaggerItem>
             </div>
 
-            <StaggerItem className="flex-shrink-0 w-full lg:w-auto">
-              <div className="flex flex-col gap-6 bg-white p-8 sm:p-10 rounded-2xl shadow-2xl">
+            <StaggerItem className="w-full flex-shrink-0 lg:w-[26rem]">
+              <div
+                id={BOOKING_CARD_ID}
+                className="flex scroll-mt-24 flex-col gap-6 rounded-2xl bg-white p-6 shadow-2xl sm:p-8"
+              >
                 <div className="flex flex-col">
-                  <span className="text-neutral-500 text-sm font-medium uppercase tracking-wider mb-1">
+                  <span className="mb-1 text-sm font-medium uppercase tracking-wider text-neutral-500">
                     Starting from
                   </span>
-                  <span className="text-neutral-900 font-serif text-4xl">
+                  <span className="font-serif text-4xl text-neutral-900">
                     {formatPrice(room.nightlyRate)} / night
                   </span>
                 </div>
-                <button
-                  className={buttonVariants({
-                    variant: "default",
-                    size: "lg",
-                    className: "w-full min-w-[200px]",
-                  })}
-                >
-                  Book This Room
-                </button>
+
+                <AvailabilitySearch
+                  action={`/rooms/${room.id}`}
+                  resultsId={BOOKING_CARD_ID}
+                  capacities={[room]}
+                  capacityLabel="This room sleeps up to"
+                  submitLabel="Check this room"
+                  defaultValues={
+                    search?.status === "ok"
+                      ? { ...search.stay, ...search.guests }
+                      : undefined
+                  }
+                />
+
+                <div className="border-t border-neutral-200 pt-6" role="status">
+                  {stay.kind === "available" ? (
+                    <>
+                      <PriceBreakdown price={stay.price} />
+                      {stay.unitsLeft <= 2 ? (
+                        <p className="mt-2 text-sm text-neutral-600">
+                          Only {stay.unitsLeft} left for these dates.
+                        </p>
+                      ) : null}
+                      <Link
+                        href={stay.href}
+                        className={buttonVariants({
+                          variant: "default",
+                          size: "lg",
+                          className: "mt-5 h-12 w-full",
+                        })}
+                      >
+                        Book This Room
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-sm text-neutral-700">
+                        {stay.kind === "unavailable"
+                          ? "Sorry, this room is unavailable for these dates. Try different dates or another room."
+                          : stay.kind === "exceeds-capacity"
+                            ? `This room can't hold that many guests. It sleeps up to ${room.maxGuests}.`
+                            : bookingMessage(room, roomsSearch)}
+                      </p>
+                      {stay.kind === "unavailable" ||
+                      stay.kind === "exceeds-capacity" ? (
+                        <Link
+                          href="/rooms"
+                          className={buttonVariants({
+                            variant: "outline",
+                            size: "lg",
+                            className: "mt-5 h-12 w-full",
+                          })}
+                        >
+                          See other rooms
+                        </Link>
+                      ) : null}
+                    </>
+                  )}
+                </div>
               </div>
             </StaggerItem>
           </div>

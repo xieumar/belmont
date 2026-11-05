@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { StaggerContainer, StaggerItem } from "@/components/ui/animations";
 
@@ -38,12 +39,15 @@ export function CallToAction() {
 
           <StaggerItem>
             <div className="flex w-full items-start justify-start">
-              <button className="group flex items-center justify-center gap-3 rounded-full bg-terra-400 hover:bg-terra-500 px-10 py-5 text-neutral-100 transition-transform hover:scale-105 active:scale-95">
+              <Link
+                href="/rooms"
+                className="group flex items-center justify-center gap-3 rounded-full bg-terra-400 hover:bg-terra-500 px-10 py-5 text-neutral-100 transition-transform hover:scale-105 active:scale-95"
+              >
                 <span className="text-sm font-semibold tracking-widest uppercase">
-                  Explore
+                  Book now
                 </span>
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </button>
+              </Link>
             </div>
           </StaggerItem>
         </StaggerContainer>
