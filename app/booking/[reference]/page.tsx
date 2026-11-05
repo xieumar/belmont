@@ -7,6 +7,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { getRoomById } from "@/data/rooms";
 import { bookingAccessCookieName } from "@/lib/booking/access";
 import { getStore } from "@/lib/booking/get-store";
+import { canCancel } from "@/lib/booking/policy";
 import { REFERENCE_PATTERN } from "@/lib/booking/reference";
 import type { BookingDTO } from "@/lib/booking/store";
 
@@ -75,6 +76,10 @@ export default async function BookingPage({
   }
 
   return (
-    <BookingConfirmation booking={booking} room={getRoomById(booking.roomId)} />
+    <BookingConfirmation
+      booking={booking}
+      room={getRoomById(booking.roomId)}
+      cancellation={canCancel(booking)}
+    />
   );
 }

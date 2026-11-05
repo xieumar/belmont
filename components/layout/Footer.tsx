@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 const NAV_ITEMS = [
   { label: "Home", href: "/" },
   { label: "Rooms & Suites", href: "/rooms" },
+  { label: "Manage Booking", href: "/manage-booking" },
   { label: "Facilities", href: "/facilities" },
   { label: "Dining & Bar", href: "/dining" },
   { label: "Our Story", href: "/about" },

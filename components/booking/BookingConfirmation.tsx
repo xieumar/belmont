@@ -1,19 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Download } from "lucide-react";
+import { CancelBookingDialog } from "@/components/booking/CancelBookingDialog";
 import { PriceBreakdown } from "@/components/booking/PriceBreakdown";
+import { ScrollToStatusOnCancel } from "@/components/booking/ScrollToStatusOnCancel";
 import { buttonVariants } from "@/components/ui/button";
 import { hotel } from "@/data/hotel";
 import type { Room } from "@/data/rooms";
 import { nightsBetween } from "@/lib/booking/dates";
 import { formatDate, pluralise } from "@/lib/booking/format";
+import type { CancellationDecision } from "@/lib/booking/policy";
 import type { BookingDTO } from "@/lib/booking/store";
 
 interface BookingConfirmationProps {
   booking: BookingDTO;
   /** Undefined if the room has since been removed from the catalogue. */
   room?: Room;
+  /** Whether the guest may still cancel online; decided on the server. */
+  cancellation: CancellationDecision;
 }
+
+const STATUS_HEADING_ID = "booking-status-heading";
 
 const longDate = (date: string) =>
   formatDate(date, {
@@ -41,6 +48,7 @@ function Row({
 export function BookingConfirmation({
   booking,
   room,
+  cancellation,
 }: BookingConfirmationProps) {
   const cancelled = booking.status === "cancelled";
   const nights = nightsBetween(booking.checkIn, booking.checkOut);
@@ -55,10 +63,18 @@ export function BookingConfirmation({
 
   return (
     <div className="mx-auto w-full max-w-3xl px-6 py-12 sm:px-8 md:py-16">
+      <ScrollToStatusOnCancel
+        cancelled={cancelled}
+        headingId={STATUS_HEADING_ID}
+      />
       <p className="font-sans text-sm font-semibold uppercase tracking-[0.2em] text-[#A98E67]">
         {cancelled ? "Booking cancelled" : "Booking confirmed"}
       </p>
-      <h1 className="mt-3 font-serif text-3xl font-medium text-neutral-900 sm:text-4xl">
+      <h1
+        id={STATUS_HEADING_ID}
+        tabIndex={-1}
+        className="mt-3 font-serif text-3xl font-medium text-neutral-900 outline-none sm:text-4xl"
+      >
         {cancelled
           ? "This booking has been cancelled"
           : `Thank you, ${booking.guest.name.split(" ")[0]}`}
@@ -137,6 +153,12 @@ export function BookingConfirmation({
           check-in ({hotel.checkInTime} on {formatDate(booking.checkIn)}). After
           that, please contact the hotel.
         </p>
+        {!cancelled && !cancellation.allowed ? (
+          <p className="mt-2 font-medium text-neutral-900">
+            The free cancellation period for this booking has ended. Please
+            contact the hotel to change or cancel it.
+          </p>
+        ) : null}
         <p className="mt-2">
           See our{" "}
           <Link href="/terms" className="underline underline-offset-4">
@@ -159,6 +181,9 @@ export function BookingConfirmation({
           <Download aria-hidden="true" />
           Download PDF
         </a>
+        {!cancelled && cancellation.allowed ? (
+          <CancelBookingDialog reference={booking.reference} />
+        ) : null}
         <Link
           href="/rooms"
           className={buttonVariants({ variant: "ghost", size: "lg" })}
