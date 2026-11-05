@@ -24,6 +24,13 @@ export const metadata: Metadata = {
   title: "Belmont Hotel | Luxury Resort & Sanctuary",
   description:
     "Unwind in a dreamy haven. Discover bespoke luxury, nature-inspired pools, panoramic suites, and world-class hospitality at Belmont Hotel.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+  },
 };
 
 export default function RootLayout({
