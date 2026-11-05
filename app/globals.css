@@ -201,3 +201,16 @@
 @utility link-underline {
   @apply relative pb-0.5 transition-colors after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:transition-all after:duration-300 hover:after:w-full;
 }
+
+/* Respect the visitor's reduced-motion setting for CSS transitions, hover
+   scaling and smooth scrolling. framer-motion is handled by MotionProvider. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

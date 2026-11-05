@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Download } from "lucide-react";
 import { CancelBookingDialog } from "@/components/booking/CancelBookingDialog";
 import { PriceBreakdown } from "@/components/booking/PriceBreakdown";
+import { ScrollToStatusOnCancel } from "@/components/booking/ScrollToStatusOnCancel";
 import { buttonVariants } from "@/components/ui/button";
 import { hotel } from "@/data/hotel";
 import type { Room } from "@/data/rooms";
@@ -18,6 +19,8 @@ interface BookingConfirmationProps {
   /** Whether the guest may still cancel online; decided on the server. */
   cancellation: CancellationDecision;
 }
+
+const STATUS_HEADING_ID = "booking-status-heading";
 
 const longDate = (date: string) =>
   formatDate(date, {
@@ -60,10 +63,18 @@ export function BookingConfirmation({
 
   return (
     <div className="mx-auto w-full max-w-3xl px-6 py-12 sm:px-8 md:py-16">
+      <ScrollToStatusOnCancel
+        cancelled={cancelled}
+        headingId={STATUS_HEADING_ID}
+      />
       <p className="font-sans text-sm font-semibold uppercase tracking-[0.2em] text-[#A98E67]">
         {cancelled ? "Booking cancelled" : "Booking confirmed"}
       </p>
-      <h1 className="mt-3 font-serif text-3xl font-medium text-neutral-900 sm:text-4xl">
+      <h1
+        id={STATUS_HEADING_ID}
+        tabIndex={-1}
+        className="mt-3 font-serif text-3xl font-medium text-neutral-900 outline-none sm:text-4xl"
+      >
         {cancelled
           ? "This booking has been cancelled"
           : `Thank you, ${booking.guest.name.split(" ")[0]}`}

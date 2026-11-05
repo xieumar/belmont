@@ -1,11 +1,12 @@
 "use client";
 
-import { useActionState, useId } from "react";
+import { useActionState, useId, useRef } from "react";
 import { lookupBookingAction } from "@/app/manage-booking/actions";
 import { Button } from "@/components/ui/button";
 import { FormField } from "@/components/ui/form-field";
 import { Input } from "@/components/ui/input";
 import type { LookupState } from "@/lib/booking/lookup";
+import { useFocusFirstError } from "@/lib/hooks/use-focus-first-error";
 
 const initialState: LookupState = {
   values: { reference: "", email: "" },
@@ -20,8 +21,15 @@ export function ManageBookingForm() {
   );
   const { values, fieldErrors, formError } = state;
 
+  const formRef = useRef<HTMLFormElement>(null);
+  useFocusFirstError(
+    formRef,
+    state,
+    Boolean(formError) || Object.keys(fieldErrors).length > 0
+  );
+
   return (
-    <form action={formAction} noValidate className="grid gap-5">
+    <form ref={formRef} action={formAction} noValidate className="grid gap-5">
       <FormField
         id={`${id}-reference`}
         label="Booking reference"
@@ -63,6 +71,7 @@ export function ManageBookingForm() {
       {formError ? (
         <p
           role="alert"
+          tabIndex={-1}
           className="rounded-xl bg-destructive/10 px-4 py-3 text-sm text-destructive"
         >
           {formError}

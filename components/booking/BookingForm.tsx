@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { FormField } from "@/components/ui/form-field";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useFocusFirstError } from "@/lib/hooks/use-focus-first-error";
 import type { CheckoutState, CheckoutValues } from "@/lib/booking/checkout";
 
 interface BookingFormProps {
@@ -27,6 +28,13 @@ export function BookingForm({ initialValues }: BookingFormProps) {
     { values: initialValues, fieldErrors: {} }
   );
   const { values, fieldErrors, formError } = state;
+
+  const formRef = useRef<HTMLFormElement>(null);
+  useFocusFirstError(
+    formRef,
+    state,
+    Boolean(formError) || Object.keys(fieldErrors).length > 0
+  );
 
   // A second submit while one is in flight would queue a second booking. The
   // ref closes the gap before `pending` has re-rendered the disabled button.
@@ -44,6 +52,7 @@ export function BookingForm({ initialValues }: BookingFormProps) {
 
   return (
     <form
+      ref={formRef}
       action={formAction}
       onSubmit={guardDoubleSubmit}
       noValidate
@@ -128,6 +137,7 @@ export function BookingForm({ initialValues }: BookingFormProps) {
       {formError ? (
         <p
           role="alert"
+          tabIndex={-1}
           className="rounded-xl bg-destructive/10 px-4 py-3 text-sm text-destructive"
         >
           {formError}

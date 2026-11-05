@@ -66,6 +66,8 @@ export default function Navbar() {
           onClick={() => setOpen(!open)}
           className="flex lg:hidden rounded-full p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
           aria-label="Toggle navigation menu"
+          aria-expanded={open}
+          aria-controls="mobile-nav"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
@@ -73,7 +75,10 @@ export default function Navbar() {
 
       {/* Mobile / tablet drawer */}
       {open && (
-        <nav className="lg:hidden border-t border-border bg-background px-6 pb-6 pt-4">
+        <nav
+          id="mobile-nav"
+          className="lg:hidden border-t border-border bg-background px-6 pb-6 pt-4"
+        >
           <div className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <Link
