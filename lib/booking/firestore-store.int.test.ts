@@ -56,6 +56,19 @@ describe("availability and creation", () => {
     expect(await store.getAvailability(june)).toEqual({ single: 1, double: 2 });
   });
 
+  it("stores a booking whose optional guest fields are blank", async () => {
+    const input = make("single", "2027-06-10", "2027-06-12");
+    const booking = await store.createBooking({
+      ...input,
+      guest: { ...input.guest, specialRequests: undefined },
+    });
+    const found = await store.getByReference(
+      booking.reference,
+      input.guest.email
+    );
+    expect(found?.guest.specialRequests).toBeUndefined();
+  });
+
   it("books the last unit and then refuses", async () => {
     await store.createBooking(make("single", "2027-06-01", "2027-06-03"));
     await expect(
