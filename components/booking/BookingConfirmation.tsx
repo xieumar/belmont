@@ -1,18 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Download } from "lucide-react";
+import { CancelBookingDialog } from "@/components/booking/CancelBookingDialog";
 import { PriceBreakdown } from "@/components/booking/PriceBreakdown";
 import { buttonVariants } from "@/components/ui/button";
 import { hotel } from "@/data/hotel";
 import type { Room } from "@/data/rooms";
 import { nightsBetween } from "@/lib/booking/dates";
 import { formatDate, pluralise } from "@/lib/booking/format";
+import type { CancellationDecision } from "@/lib/booking/policy";
 import type { BookingDTO } from "@/lib/booking/store";
 
 interface BookingConfirmationProps {
   booking: BookingDTO;
   /** Undefined if the room has since been removed from the catalogue. */
   room?: Room;
+  /** Whether the guest may still cancel online; decided on the server. */
+  cancellation: CancellationDecision;
 }
 
 const longDate = (date: string) =>
@@ -41,6 +45,7 @@ function Row({
 export function BookingConfirmation({
   booking,
   room,
+  cancellation,
 }: BookingConfirmationProps) {
   const cancelled = booking.status === "cancelled";
   const nights = nightsBetween(booking.checkIn, booking.checkOut);
@@ -137,6 +142,12 @@ export function BookingConfirmation({
           check-in ({hotel.checkInTime} on {formatDate(booking.checkIn)}). After
           that, please contact the hotel.
         </p>
+        {!cancelled && !cancellation.allowed ? (
+          <p className="mt-2 font-medium text-neutral-900">
+            The free cancellation period for this booking has ended. Please
+            contact the hotel to change or cancel it.
+          </p>
+        ) : null}
         <p className="mt-2">
           See our{" "}
           <Link href="/terms" className="underline underline-offset-4">
@@ -159,6 +170,9 @@ export function BookingConfirmation({
           <Download aria-hidden="true" />
           Download PDF
         </a>
+        {!cancelled && cancellation.allowed ? (
+          <CancelBookingDialog reference={booking.reference} />
+        ) : null}
         <Link
           href="/rooms"
           className={buttonVariants({ variant: "ghost", size: "lg" })}
