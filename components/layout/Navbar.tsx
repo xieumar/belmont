@@ -11,6 +11,7 @@ const navLinks = [
   { label: "About", href: "/about" },
   { label: "Dining", href: "/dining" },
   { label: "Rooms", href: "/rooms" },
+  { label: "Manage booking", href: "/manage-booking" },
   { label: "Contact", href: "/contact" },
 ];
 

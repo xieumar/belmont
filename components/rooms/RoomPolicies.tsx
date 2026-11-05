@@ -3,6 +3,7 @@ import {
   StaggerItem,
   SlideUp,
 } from "@/components/ui/animations";
+import { hotel } from "@/data/hotel";
 import { Room } from "@/data/rooms";
 
 interface RoomPoliciesProps {
@@ -10,7 +11,12 @@ interface RoomPoliciesProps {
 }
 
 export function RoomPolicies({ room }: RoomPoliciesProps) {
-  if (!room.policies || room.policies.length === 0) return null;
+  // Derived from the same config the cancel action enforces, so the page
+  // can never promise a different cutoff than the server applies.
+  const policies = [
+    ...(room.policies ?? []),
+    `Free cancellation until ${hotel.freeCancellationHours} hours before check-in`,
+  ];
 
   return (
     <section className="bg-neutral-50 px-6 py-24 sm:px-8 md:py-32">
@@ -25,7 +31,7 @@ export function RoomPolicies({ room }: RoomPoliciesProps) {
 
         <StaggerContainer className="mx-auto max-w-3xl bg-white p-8 sm:p-12 rounded-3xl shadow-sm border border-neutral-100">
           <ul className="flex flex-col gap-6">
-            {room.policies.map((policy, index) => (
+            {policies.map((policy, index) => (
               <StaggerItem key={index}>
                 <li className="flex items-center gap-4 border-b border-neutral-100 pb-6 last:border-0 last:pb-0">
                   <div className="h-2 w-2 shrink-0 rounded-full bg-terra-400" />
