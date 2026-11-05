@@ -44,10 +44,10 @@ describe("roomStayState", () => {
     });
   });
 
-  it("links to the room page carrying the search", () => {
+  it("links to checkout for this room and stay", () => {
     const state = roomStayState(room, search(2, 1), { "test-room": 1 });
     expect(state).toMatchObject({
-      href: "/rooms/test-room?checkIn=2027-03-10&checkOut=2027-03-13&adults=2&children=1",
+      href: "/book?room=test-room&checkIn=2027-03-10&checkOut=2027-03-13&adults=2&children=1",
     });
   });
 

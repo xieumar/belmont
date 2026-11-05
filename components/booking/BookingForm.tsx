@@ -7,6 +7,7 @@ import {
   useRef,
   type FormEvent,
 } from "react";
+import Link from "next/link";
 import { createBookingAction } from "@/app/book/actions";
 import { Button } from "@/components/ui/button";
 import { FormField } from "@/components/ui/form-field";
@@ -111,6 +112,18 @@ export function BookingForm({ initialValues }: BookingFormProps) {
           />
         )}
       </FormField>
+
+      <p className="text-xs leading-relaxed text-neutral-500">
+        By confirming, you agree to our{" "}
+        <Link href="/terms" className="underline underline-offset-4">
+          Terms of Service
+        </Link>{" "}
+        and acknowledge our{" "}
+        <Link href="/privacy" className="underline underline-offset-4">
+          Privacy Policy
+        </Link>
+        .
+      </p>
 
       {formError ? (
         <p

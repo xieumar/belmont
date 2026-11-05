@@ -14,7 +14,7 @@ export type RoomStayState =
       kind: "available";
       price: PriceBreakdown;
       unitsLeft: number;
-      /** Room page carrying the search, so the choice isn't lost. */
+      /** Checkout for this room and the searched stay. */
       href: string;
     }
   | { kind: "unavailable" }
@@ -38,6 +38,7 @@ export function roomStayState(
 
   const nights = nightsBetween(stay.checkIn, stay.checkOut);
   const query = new URLSearchParams({
+    room: room.id,
     checkIn: stay.checkIn,
     checkOut: stay.checkOut,
     adults: String(guests.adults),
@@ -47,6 +48,6 @@ export function roomStayState(
     kind: "available",
     price: calculatePrice(room.nightlyRate, nights),
     unitsLeft: unitsLeft as number,
-    href: `/rooms/${room.id}?${query}`,
+    href: `/book?${query}`,
   };
 }

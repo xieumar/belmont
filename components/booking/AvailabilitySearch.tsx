@@ -39,6 +39,10 @@ interface AvailabilitySearchProps {
    * could fit one more guest. Without it, only the schema's limit applies.
    */
   capacities?: RoomCapacity[];
+  /** Lead-in for the capacity hint, e.g. "This room sleeps up to". */
+  capacityLabel?: string;
+  /** Submit button text. */
+  submitLabel?: string;
   className?: string;
 }
 
@@ -50,6 +54,8 @@ export function AvailabilitySearch({
   action = "/rooms",
   resultsId,
   capacities,
+  capacityLabel = "Our largest room sleeps up to",
+  submitLabel = "Check availability",
   className,
 }: AvailabilitySearchProps) {
   const id = useId();
@@ -152,7 +158,7 @@ export function AvailabilitySearch({
 
       {maxGuestsPerRoom ? (
         <p className="mt-3 text-xs text-neutral-500">
-          Our largest room sleeps up to {maxGuestsPerRoom} guests.
+          {capacityLabel} {maxGuestsPerRoom} guests.
         </p>
       ) : null}
 
@@ -163,7 +169,7 @@ export function AvailabilitySearch({
         aria-busy={isPending}
         className="mt-5 h-11 w-full"
       >
-        {isPending ? "Checking availability…" : "Check availability"}
+        {isPending ? "Checking availability…" : submitLabel}
       </Button>
     </form>
   );

@@ -29,7 +29,7 @@ const LEGAL_LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="w-full border-t border-border bg-background pb-12 pt-16">
+    <footer className="w-full border-t border-border bg-background pb-12 pt-16 print:hidden">
       <div className="mx-auto max-w-7xl px-6 sm:px-8">
         {/* Main grid */}
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
